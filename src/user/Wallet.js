@@ -217,7 +217,7 @@ const Wallet = () => {
             {/* DESKTOP */}
             {/* DESKTOP */}
             {/* DESKTOP */}
-            <div className="d-none d-md-none d-lg-block ">
+            <div className="d-none d-md-none d-lg-block p-3">
               <table className="table table-bordered">
                 <thead>
                   <tr>
@@ -311,7 +311,7 @@ const Wallet = () => {
             {/* MOBILE */}
             {/* MOBILE */}
             {/* MOBILE */}
-            <div className="d-block d-lg-none wallet-history-mobile">
+            <div className="d-block d-lg-none wallet-history-mobile p-3">
               {histories && histories?.length === 0 ? (
                 <div className="whistory m-0">No record found</div>
               ) : (

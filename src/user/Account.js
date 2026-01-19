@@ -34,7 +34,7 @@ const Account = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
+
     try {
       // Prepare update data (exclude password if empty)
       const updateData = {
@@ -42,20 +42,20 @@ const Account = () => {
         email: form.email.trim(),
         phone: form.phone.trim(),
       };
-      
+
       // Only include password if it's not empty
       if (form.password && form.password.trim() !== "") {
         updateData.password = form.password;
       }
-      
+
       const response = await otherAPI.updateProfile(updateData);
       const res = await response.json();
-      
+
       if (response.ok && (res.success || res.message)) {
         // Clear password field after successful update
         setForm((prev) => ({ ...prev, password: "" }));
         message.success(res.message || "Profile updated successfully");
-        
+
         // Refresh user data from API
         await getUserData();
       } else {
@@ -72,11 +72,11 @@ const Account = () => {
     try {
       setIsLoading(true);
       const response = await authAPI.getUserInfo();
-      
+
       if (response.ok) {
         const data = await response.json();
         const userData = data.data || data;
-        
+
         if (userData) {
           setForm({
             name: userData.name || "",
@@ -84,7 +84,7 @@ const Account = () => {
             phone: userData.phone || userData.mobile || "",
             password: "",
           });
-          
+
           // Update auth context
           updateUser(userData);
         }
@@ -137,7 +137,7 @@ const Account = () => {
             <h5 className="m-0">Logout</h5>
             <LogoutIcon className="icon" />
           </div>
-          
+
           <form onSubmit={handleUpdate}>
             <div className="row">
               <div className="col-12 col-sm-12 col-md-8 col-lg-6">
@@ -170,6 +170,7 @@ const Account = () => {
                     onChange={handleInputChange}
                     placeholder="Enter your email"
                     required
+                    disabled
                   />
                 </div>
 
@@ -205,8 +206,8 @@ const Account = () => {
                   />
                 </div>
 
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   className="theme-btn w-100"
                   disabled={loading}
                 >

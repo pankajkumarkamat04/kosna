@@ -151,10 +151,9 @@
 }
 
 /* Mobile History Cards */
-.wallet-history-mobile {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.wallet-dash table td {
+  padding: 18px 10px !important;
+  vertical-align: middle;
 }
 
 .whistory {
@@ -163,6 +162,11 @@
   border-radius: 16px;
   padding: 20px;
   transition: all 0.3s ease;
+  margin-bottom: 25px;
+}
+
+.whistory:last-child {
+  margin-bottom: 0;
 }
 
 .whistory:hover {

@@ -115,7 +115,7 @@ const Orders = () => {
           {/* DESKTOP */}
           {/* DESKTOP */}
           {/* DESKTOP */}
-          <div className="d-none d-lg-block">
+          <div className="d-none d-lg-block p-3">
             <table className="w-100 table table-bordered">
               <thead>
                 <tr>
@@ -158,11 +158,11 @@ const Orders = () => {
                     } catch (e) {
                       descriptionData = {};
                     }
-                    
+
                     const productName = item.gameName || item.items?.[0]?.itemName || item.p_info || "N/A";
                     const orderAmount = item.amount || item.items?.[0]?.price || item.price || 0;
                     const playerId = descriptionData.playerId || item.playerId || "N/A";
-                    
+
                     return (
                       <tr key={item._id || index}>
                         <td>
@@ -209,7 +209,7 @@ const Orders = () => {
           {/* MOBILE */}
           {/* MOBILE */}
           {/* MOBILE */}
-          <div className="d-block d-lg-none wallet-history-mobile">
+          <div className="d-block d-lg-none wallet-history-mobile p-3">
             {orders && orders?.length === 0 ? (
               <div className="whistory m-0">No order found</div>
             ) : (
@@ -221,12 +221,12 @@ const Orders = () => {
                 } catch (e) {
                   descriptionData = {};
                 }
-                
+
                 const productName = item.gameName || item.items?.[0]?.itemName || item.p_info || "N/A";
                 const orderAmount = item.amount || item.items?.[0]?.price || item.price || 0;
                 const playerId = descriptionData.playerId || item.playerId || "N/A";
                 const server = descriptionData.server || item.zoneId || item.server || null;
-                
+
                 return (
                   <div className="whistory" key={item._id || index}>
                     <div className="items">
