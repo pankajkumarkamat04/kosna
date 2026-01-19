@@ -1,0 +1,17 @@
+.search-page-container {
+  padding: 100px 40px;
+  background: var(--bg);
+  min-height: 80vh;
+}
+
+@media screen and (max-width: 992px) {
+  .search-page-container {
+    padding: 80px 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .search-page-container {
+    padding: 60px 15px;
+  }
+}

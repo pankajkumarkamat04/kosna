@@ -1,0 +1,143 @@
+.main-home-container {
+  background: var(--bg);
+}
+
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
+  }
+
+  .icon {
+    margin-top: 10px;
+    font-size: 50px;
+    color: #fff;
+    cursor: pointer;
+  }
+}
+
+/* Action Buttons */
+.action-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 15px;
+  flex-wrap: nowrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.action-button {
+  flex: 1;
+  min-width: 0;
+  max-width: 100%;
+  background: linear-gradient(135deg, rgba(1, 255, 253, 0.15), rgba(1, 255, 253, 0.05));
+  color: var(--a);
+  padding: 12px 8px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(1, 255, 253, 0.2);
+  flex-shrink: 0;
+  border: 2px solid rgba(1, 255, 253, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.action-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(1, 255, 253, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.action-button:hover::before {
+  left: 100%;
+}
+
+.action-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(1, 255, 253, 0.4);
+  background: linear-gradient(135deg, var(--a), rgba(1, 255, 253, 0.7));
+  border-color: var(--a);
+}
+
+.action-button:hover .action-icon,
+.action-button:hover span {
+  color: #1a1a1a;
+}
+
+.action-button:active {
+  transform: translateY(0);
+}
+
+.action-icon {
+  font-size: 24px !important;
+  color: var(--a);
+  transition: all 0.3s ease;
+}
+
+.action-button span {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--a);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 786px) {
+  .popup-container {
+    img {
+      width: 90%;
+    }
+  }
+
+  .action-buttons-container {
+    padding: 15px 20px;
+    gap: 8px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .action-button {
+    min-width: 0;
+    padding: 6px 5px;
+    flex-shrink: 0;
+  }
+
+  .action-icon {
+    font-size: 18px !important;
+  }
+
+  .action-button span {
+    font-size: 10px;
+    white-space: nowrap;
+  }
+}

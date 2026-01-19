@@ -1,0 +1,131 @@
+.bg-heading {
+  padding: 60px 50px;
+  background: linear-gradient(135deg, rgba(1, 255, 253, 0.15), rgba(1, 255, 253, 0.08));
+  border-bottom: 2px solid rgba(1, 255, 253, 0.3);
+  color: #fff !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-heading::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(1, 255, 253, 0.1), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.bg-heading h4 {
+  font-size: 36px;
+  text-align: center;
+  color: var(--a) !important;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 0 20px rgba(1, 255, 253, 0.3);
+}
+
+.terms-container {
+  padding: 80px 40px;
+  background: var(--bg);
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 60vh;
+}
+
+.terms-container h5 {
+  color: var(--a) !important;
+  font-weight: 600;
+  font-size: 20px;
+  position: relative;
+  text-transform: uppercase;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+}
+
+.terms-container h5::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--a), transparent);
+  box-shadow: 0 0 10px rgba(1, 255, 253, 0.5);
+}
+
+.terms-container p {
+  color: rgba(255, 255, 255, 0.85) !important;
+  line-height: 1.8;
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+.terms-container ul,
+.terms-container ol {
+  color: rgba(255, 255, 255, 0.85) !important;
+  line-height: 1.8;
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+.terms-container li {
+  margin-bottom: 8px;
+}
+
+@media screen and (max-width: 992px) {
+  .bg-heading {
+    padding: 50px 30px;
+  }
+
+  .bg-heading h4 {
+    font-size: 28px;
+  }
+
+  .terms-container {
+    padding: 60px 20px;
+  }
+
+  .terms-container h5 {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .bg-heading {
+    padding: 40px 20px;
+  }
+
+  .bg-heading h4 {
+    font-size: 24px;
+  }
+
+  .terms-container {
+    padding: 40px 15px;
+  }
+
+  .terms-container h5 {
+    font-size: 16px;
+  }
+
+  .terms-container p {
+    font-size: 14px;
+  }
+}

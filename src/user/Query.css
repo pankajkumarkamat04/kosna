@@ -1,0 +1,68 @@
+.query-reply-container {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.back-btnn {
+  cursor: pointer;
+  color: var(--a) !important;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.back-btnn:hover {
+  transform: translateX(-5px);
+  text-shadow: 0 0 10px rgba(1, 255, 253, 0.5);
+}
+
+/* VIEW QUERY  */
+.view-query-container {
+  background: linear-gradient(135deg, rgba(1, 255, 253, 0.05), rgba(1, 255, 253, 0.02));
+  border: 2px solid rgba(1, 255, 253, 0.2);
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.query-msg {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff !important;
+  border-radius: 12px 12px 12px 0;
+  margin-bottom: 15px;
+  padding: 15px 20px;
+  align-self: flex-start;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: fit-content;
+  max-width: 70%;
+  position: relative;
+  line-height: 1.5;
+}
+
+.query-msg.active {
+  align-self: flex-end;
+  background: linear-gradient(135deg, rgba(1, 255, 253, 0.2), rgba(1, 255, 253, 0.1));
+  border: 1px solid var(--a);
+  color: #fff !important;
+  border-radius: 12px 12px 0 12px;
+  margin-left: auto;
+  box-shadow: 0 4px 15px rgba(1, 255, 253, 0.1);
+}
+
+.closedticket {
+  background: linear-gradient(135deg, rgba(255, 77, 79, 0.2), rgba(255, 77, 79, 0.1));
+  width: 100%;
+  padding: 15px;
+  text-align: center;
+  color: #ff4d4f !important;
+  border-radius: 12px;
+  margin-top: 25px;
+  border: 2px solid rgba(255, 77, 79, 0.4);
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(255, 77, 79, 0.2);
+}

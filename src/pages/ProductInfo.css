@@ -1,0 +1,292 @@
+/* PAYMENT OPTIONS */
+.payment-section {
+  margin-top: 30px;
+  padding: 25px;
+  background: linear-gradient(135deg, rgba(1, 255, 253, 0.05), rgba(1, 255, 253, 0.02));
+  border: 2px solid rgba(1, 255, 253, 0.2);
+  border-radius: 16px;
+}
+
+.payment-section h3 {
+  color: var(--a) !important;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.payment-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.payment-options.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.payment-method {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px;
+  border: 2px solid rgba(1, 255, 253, 0.3);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(1, 255, 253, 0.08), rgba(1, 255, 253, 0.03));
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.payment-method::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(1, 255, 253, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.payment-method:hover::before {
+  left: 100%;
+}
+
+.payment-method:hover {
+  border-color: var(--a);
+  box-shadow: 0 6px 20px rgba(1, 255, 253, 0.3);
+  transform: translateY(-2px);
+}
+
+.payment-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.payment-info img {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.payment-title {
+  font-weight: 600;
+  margin: 0;
+  color: #fff !important;
+  font-size: 16px;
+}
+
+.balance-info {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7) !important;
+  margin: 0;
+}
+
+.upi-apps {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.upi-apps img {
+  border-radius: 6px;
+  transition: transform 0.3s ease;
+}
+
+.upi-apps img:hover {
+  transform: scale(1.1);
+}
+
+.payment-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 130px;
+}
+
+.wallet-btn {
+  background: linear-gradient(135deg, var(--a), rgba(1, 255, 253, 0.8));
+  color: #0a192f;
+  box-shadow: 0 4px 15px rgba(1, 255, 253, 0.3);
+}
+
+.wallet-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(1, 255, 253, 0.5);
+}
+
+.upi-btn {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.upi-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.5);
+}
+
+.payment-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.login-btn {
+  background: linear-gradient(135deg, var(--a), rgba(1, 255, 253, 0.8));
+  color: #0a192f;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(1, 255, 253, 0.3);
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(1, 255, 253, 0.5);
+}
+
+.validation-required-notice {
+  text-align: center;
+  padding: 15px;
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.15), rgba(255, 193, 7, 0.05));
+  border: 2px solid rgba(255, 193, 7, 0.4);
+  border-radius: 12px;
+  color: #ffc107 !important;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .payment-section {
+    padding: 20px;
+  }
+
+  .payment-method {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .payment-info {
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .payment-btn {
+    width: 100%;
+  }
+}
+
+/* PACK CATEGORY  */
+.pcategory {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--a) rgba(1, 255, 253, 0.2);
+  padding-bottom: 8px;
+  padding-top: 5px;
+}
+
+.pcategory::-webkit-scrollbar {
+  height: 8px;
+}
+
+.pcategory::-webkit-scrollbar-track {
+  background: rgba(1, 255, 253, 0.1);
+  border-radius: 10px;
+}
+
+.pcategory::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, var(--a), rgba(1, 255, 253, 0.8));
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(1, 255, 253, 0.3);
+}
+
+.pcategory::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #fff, var(--a));
+}
+
+.pcategory .pc {
+  min-height: 110px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px 12px;
+  color: #fff;
+  border-radius: 12px;
+  cursor: pointer;
+  min-width: 110px;
+  width: 110px;
+  flex-shrink: 0;
+  text-align: center;
+  border: 2px solid rgba(1, 255, 253, 0.3);
+  background: linear-gradient(135deg, rgba(1, 255, 253, 0.05), rgba(1, 255, 253, 0.02));
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pcategory .pc::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(1, 255, 253, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.pcategory .pc:hover::before {
+  left: 100%;
+}
+
+.pcategory .pc:hover {
+  background: linear-gradient(135deg, rgba(1, 255, 253, 0.15), rgba(1, 255, 253, 0.08));
+  border-color: var(--a);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(1, 255, 253, 0.3);
+}
+
+.pcategory .pc.active {
+  background: linear-gradient(135deg, rgba(1, 255, 253, 0.2), rgba(1, 255, 253, 0.1));
+  border-color: var(--a);
+  box-shadow: 0 6px 20px rgba(1, 255, 253, 0.4);
+}
+
+.pcategory .pc img {
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(1, 255, 253, 0.3));
+  transition: transform 0.3s ease;
+}
+
+.pcategory .pc:hover img,
+.pcategory .pc.active img {
+  transform: scale(1.1);
+}
+
+.pcategory .pc p {
+  font-size: 11px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--a) !important;
+  margin-top: 8px;
+}
+
+/* PACK CATEGORY ENDS  */

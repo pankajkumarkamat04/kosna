@@ -1,0 +1,241 @@
+.products-container {
+  padding: 10px 100px;
+  border-top: 1px rgba(1, 255, 253, 0.2) !important;
+  color: #fff;
+  padding-bottom: 50px;
+}
+
+.products-container h2 {
+  font-size: 25px;
+  color: #fff;
+
+  .icon {
+    color: var(--a);
+    font-size: 50px;
+    margin-left: 5px;
+  }
+}
+
+.products-container .hrline {
+  height: 2px;
+  background: var(--a);
+  margin-bottom: 25px;
+}
+
+.products-container .searchbox {
+  width: 100%;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.products-container .searchbox .icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10px;
+  color: var(--p);
+}
+
+.products-container .searchinput {
+  padding: 8px;
+  border: transparent;
+  width: 100%;
+  padding-left: 40px;
+  border: 2px solid var(--t);
+  background-color: var(--s);
+  border-radius: 100px;
+  color: var(--p);
+}
+
+.products-container .searchinput::placeholder {
+  color: #eee;
+}
+
+.products-container .searchinput:focus {
+  border: none !important;
+  outline: none !important;
+}
+
+.products-container .filter-buttons {
+  width: 100%;
+  display: flex;
+  overflow-x: scroll;
+  padding: 10px;
+  padding-left: 0;
+  gap: 5px;
+}
+
+.products-container .filter-buttons h5 {
+  flex-shrink: 0;
+  color: #000;
+  background-color: transparent;
+  outline: transparent;
+  border: transparent;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 5px;
+  border: var(--border);
+  margin: 0;
+}
+
+.products-container .filter-buttons h5.active {
+  background-color: var(--s);
+  color: var(--p);
+}
+
+.product-title h2 {
+  font-size: 50px;
+  color: var(--p);
+  font-weight: bold;
+}
+
+.product-title .icon {
+  color: var(--p);
+}
+
+.products {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.product {
+  width: 12%;
+  position: relative;
+  cursor: pointer;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(1, 255, 253, 0.1);
+}
+
+.product:hover {
+  border-color: var(--a);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 4px 20px rgba(1, 255, 253, 0.4);
+  transform: translateY(-5px);
+}
+
+.productimage {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px 10px 0 0;
+}
+
+.product img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  transition: 0.3s all ease;
+  object-fit: cover;
+  scale: 1;
+}
+
+.product:hover.product img {
+  scale: 1.05;
+}
+
+.productdetails {
+  background: linear-gradient(135deg, rgba(1, 255, 253, 0.1), rgba(1, 255, 253, 0.05));
+  border-radius: 0 0 10px 10px;
+  border-top: 2px solid var(--a);
+
+  .name {
+    font-size: 12px;
+    color: var(--a);
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 7px 5px 3px 7px;
+  }
+
+  .company {
+    padding: 0px 5px 3px 7px;
+    font-size: 10px;
+    color: #666;
+  }
+
+  .price {
+    background: linear-gradient(135deg, var(--a), rgba(1, 255, 253, 0.7));
+    padding: 10px;
+    border-radius: 0 0 8px 8px;
+    display: flex;
+    color: #1a1a1a;
+    font-size: 14px;
+    flex-wrap: wrap;
+
+    .fakeprice {
+      text-decoration: line-through !important;
+      margin-right: 5px;
+      color: rgba(26, 26, 26, 0.6);
+    }
+
+    .realprice {
+      font-weight: bold;
+      color: #1a1a1a;
+    }
+
+    .sale {
+      width: 100%;
+      font-size: 12px;
+      color: var(--c);
+      font-weight: bold;
+
+      .icon {
+        font-size: 14px;
+        transform: rotate(-275deg);
+        margin-right: 4px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 786px) {
+  .products-container {
+    padding: 0 20px;
+    padding-bottom: 30px;
+    justify-content: flex-start;
+    gap: 0;
+  }
+
+  .products-container h2 {
+    margin-bottom: 0;
+
+    .icon {
+      font-size: 40px;
+    }
+  }
+
+  .products-container .hrline {
+    margin-bottom: 15px;
+  }
+
+  .products {
+    justify-content: space-between;
+    margin-top: 10px;
+    gap: 0px;
+    row-gap: 15px;
+  }
+
+  .product {
+    width: 30%;
+  }
+
+  .productdetails {
+    .price {
+      font-size: 10px;
+
+      .sale {
+        font-size: 10px;
+
+        .icon {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

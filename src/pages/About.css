@@ -1,0 +1,133 @@
+.about-container {
+  padding: 80px 20px;
+  background: var(--bg);
+  min-height: 60vh;
+}
+
+.why-choose-mobi-heaven {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.why-choose-mobi-heaven h2 {
+  margin-bottom: 50px;
+  position: relative;
+  color: #fff !important;
+  text-align: center;
+  width: 100%;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.yline::before {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 3px;
+  width: 100px;
+  background: linear-gradient(90deg, transparent, var(--a), transparent);
+  box-shadow: 0 0 10px rgba(1, 255, 253, 0.5);
+}
+
+.mobi-heaven {
+  width: 22%;
+  background: linear-gradient(135deg, rgba(1, 255, 253, 0.05), rgba(1, 255, 253, 0.02));
+  border: 2px solid rgba(1, 255, 253, 0.2);
+  border-radius: 16px;
+  padding: 30px 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.mobi-heaven::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(1, 255, 253, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.mobi-heaven:hover::before {
+  left: 100%;
+}
+
+.mobi-heaven:hover {
+  transform: translateY(-10px);
+  border-color: var(--a);
+  box-shadow: 0 10px 30px rgba(1, 255, 253, 0.3);
+  background: linear-gradient(135deg, rgba(1, 255, 253, 0.1), rgba(1, 255, 253, 0.05));
+}
+
+.mobi-heaven img {
+  width: 100%;
+  max-width: 120px;
+  margin: 0 auto 20px;
+  filter: drop-shadow(0 0 10px rgba(1, 255, 253, 0.3));
+  transition: transform 0.3s ease;
+}
+
+.mobi-heaven:hover img {
+  transform: scale(1.1);
+}
+
+.mobi-heaven h4 {
+  font-weight: 600;
+  margin-top: 15px;
+  font-size: 22px;
+  color: var(--a) !important;
+  margin-bottom: 10px;
+}
+
+.mobi-heaven p {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media screen and (max-width: 992px) {
+  .why-choose-mobi-heaven {
+    padding: 0 20px;
+    gap: 20px;
+  }
+
+  .mobi-heaven {
+    width: 45%;
+  }
+
+  .why-choose-mobi-heaven h2 {
+    font-size: 28px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .about-container {
+    padding: 60px 20px;
+  }
+
+  .mobi-heaven {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .why-choose-mobi-heaven h2 {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+
+  .mobi-heaven h4 {
+    font-size: 20px;
+  }
+}

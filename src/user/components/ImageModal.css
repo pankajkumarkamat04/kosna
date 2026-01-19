@@ -1,0 +1,108 @@
+/* ============================ IMAGE MODAL CONTAINER  */
+.image-modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(10, 25, 47, 0.95);
+  backdrop-filter: blur(10px);
+  scale: 0;
+  transition: 0.3s all ease;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-modal-container.active {
+  scale: 1;
+}
+
+.modal-black-bg {
+  background: linear-gradient(135deg, rgba(1, 255, 253, 0.05), rgba(1, 255, 253, 0.02));
+  width: 80%;
+  max-width: 800px;
+  height: auto;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px;
+  position: relative;
+  border-radius: 20px;
+  border: 2px solid rgba(1, 255, 253, 0.3);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.image-modal-container .icon {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.image-modal-container .icon:hover {
+  color: var(--a);
+  transform: rotate(90deg);
+}
+
+.display-image {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.display-image img {
+  max-width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(1, 255, 253, 0.2);
+}
+
+.image-slides {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  color: #fff;
+  width: 100%;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.image-slides img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  cursor: pointer;
+  scale: 1;
+  transition: 0.3s all ease;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.image-slides img:hover {
+  scale: 1.1;
+  border-color: var(--a);
+  box-shadow: 0 4px 15px rgba(1, 255, 253, 0.3);
+}
+
+/* ============================ IMAGE MODAL CONTAINER ENDS */
+
+@media screen and (max-width: 768px) {
+  .modal-black-bg {
+    width: 95%;
+    padding: 30px 15px;
+  }
+}

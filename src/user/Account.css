@@ -1,0 +1,181 @@
+.user-accout-details label {
+  color: var(--a) !important;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: block;
+  font-size: 15px;
+}
+
+.user-accout-details h6 {
+  color: var(--a) !important;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.user-accout-details h6::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--a), transparent);
+  box-shadow: 0 0 10px rgba(1, 255, 253, 0.5);
+}
+
+.user-accout-details .form-fields {
+  border: 2px solid rgba(1, 255, 253, 0.2);
+  padding: 25px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(1, 255, 253, 0.05), rgba(1, 255, 253, 0.02));
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+.user-accout-details .form-fields:focus-within {
+  border-color: var(--a);
+  box-shadow: 0 8px 25px rgba(1, 255, 253, 0.3);
+  background: linear-gradient(135deg, rgba(1, 255, 253, 0.08), rgba(1, 255, 253, 0.04));
+}
+
+.user-accout-details .form-control {
+  background-color: rgba(1, 255, 253, 0.05) !important;
+  border: 2px solid rgba(1, 255, 253, 0.3) !important;
+  border-radius: 10px !important;
+  color: #fff !important;
+  padding: 14px 18px !important;
+  font-size: 15px !important;
+  transition: all 0.3s ease !important;
+  width: 100%;
+}
+
+.user-accout-details .form-control:focus {
+  background-color: rgba(1, 255, 253, 0.1) !important;
+  border-color: var(--a) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(1, 255, 253, 0.15) !important;
+  color: #fff !important;
+}
+
+.user-accout-details .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+  opacity: 1 !important;
+}
+
+.user-accout-details .form-control:hover:not(:focus) {
+  border-color: rgba(1, 255, 253, 0.5) !important;
+  background-color: rgba(1, 255, 253, 0.08) !important;
+}
+
+.user-accout-details .pass-input {
+  background-color: rgba(1, 255, 253, 0.05) !important;
+  border: 2px solid rgba(1, 255, 253, 0.3) !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+  padding: 14px 18px !important;
+  font-size: 15px !important;
+  transition: all 0.3s ease !important;
+}
+
+.user-accout-details .pass-input:focus {
+  background-color: rgba(1, 255, 253, 0.1) !important;
+  border-color: var(--a) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(1, 255, 253, 0.15) !important;
+  color: #fff !important;
+}
+
+.user-accout-details .pass-input::placeholder {
+  color: rgba(255, 255, 253, 0.5) !important;
+  opacity: 1 !important;
+}
+
+.user-accout-details .pass-input:hover:not(:focus) {
+  border-color: rgba(1, 255, 253, 0.5) !important;
+  background-color: rgba(1, 255, 253, 0.08) !important;
+}
+
+.user-accout-details button[type="submit"] {
+  background: linear-gradient(135deg, var(--a), rgba(1, 255, 253, 0.8));
+  color: #0a192f !important;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 28px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(1, 255, 253, 0.3);
+  width: 100%;
+  margin-top: 10px;
+}
+
+.user-accout-details button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(1, 255, 253, 0.5);
+}
+
+.logout-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 25px;
+  border: 2px solid rgba(1, 255, 253, 0.3);
+  border-radius: 12px;
+  color: var(--a) !important;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, rgba(1, 255, 253, 0.08), rgba(1, 255, 253, 0.03));
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.logout-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(1, 255, 253, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.logout-container:hover::before {
+  left: 100%;
+}
+
+.logout-container:hover {
+  background: linear-gradient(135deg, rgba(255, 77, 79, 0.15), rgba(255, 77, 79, 0.08));
+  color: #ff4d4f !important;
+  border-color: #ff4d4f;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 77, 79, 0.3);
+}
+
+.logout-container .icon {
+  font-size: 24px;
+  transition: transform 0.3s ease;
+}
+
+.logout-container:hover .icon {
+  transform: scale(1.1);
+}
+
+@media screen and (max-width: 768px) {
+  .user-accout-details .form-fields {
+    padding: 20px;
+  }
+
+  .logout-container {
+    padding: 15px 20px;
+  }
+}

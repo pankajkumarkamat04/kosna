@@ -1,0 +1,295 @@
+/* Footer Container */
+.footer-container {
+  background: linear-gradient(135deg, #0a192f 0%, #0d1f3a 100%);
+  border-top: 2px solid rgba(1, 255, 253, 0.3);
+  padding: 60px 40px 20px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--a), transparent);
+}
+
+/* WhatsApp Floating Icon */
+.wa-icon-cont {
+  position: fixed;
+  right: 20px;
+  bottom: 100px;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  border-radius: 50%;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  padding: 10px;
+  z-index: 9999;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.wa-icon-cont:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+}
+
+.wa-icon-cont a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Footer Main Content */
+.footer-main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+/* Brand Section */
+.footer-brand-section {
+  padding-right: 20px;
+}
+
+.footer-logo img {
+  filter: drop-shadow(0 0 10px rgba(1, 255, 253, 0.3));
+  margin-bottom: 15px;
+}
+
+.footer-tagline {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  line-height: 1.8;
+  margin-top: 15px;
+}
+
+/* Footer Sections */
+.footer-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-section-title {
+  color: var(--a);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+.footer-divider {
+  width: 50px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--a), transparent);
+  margin-bottom: 20px;
+}
+
+/* Payment Methods */
+.payment-methods {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.payment-logo {
+  background: rgba(1, 255, 253, 0.05);
+  border: 1px solid rgba(1, 255, 253, 0.2);
+  border-radius: 8px;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+.payment-logo:hover {
+  background: rgba(1, 255, 253, 0.1);
+  border-color: var(--a);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(1, 255, 253, 0.2);
+}
+
+.payment-logo img {
+  width: 50px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.payment-note {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  font-style: italic;
+}
+
+/* Quick Links Grid */
+.quick-links-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quick-link-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: rgba(1, 255, 253, 0.05);
+  border: 1px solid rgba(1, 255, 253, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.quick-link-item:hover {
+  background: rgba(1, 255, 253, 0.1);
+  border-color: var(--a);
+  transform: translateX(5px);
+  color: var(--a);
+}
+
+.quick-link-icon {
+  font-size: 24px !important;
+  color: var(--a);
+}
+
+.quick-link-item:hover .quick-link-icon {
+  transform: scale(1.1);
+}
+
+.quick-link-item span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Legal Links */
+.legal-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.legal-links li a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.legal-links li a:hover {
+  color: var(--a);
+  padding-left: 5px;
+}
+
+/* Copyright Section */
+.footer-copyright {
+  text-align: center;
+  padding-top: 30px;
+  margin-top: 20px;
+}
+
+.copyright-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(1, 255, 253, 0.3), transparent);
+  margin-bottom: 20px;
+}
+
+.footer-copyright p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.copyright-subtext {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  font-style: italic;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 992px) {
+  .footer-main-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+
+  .footer-brand-section {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding-right: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer-container {
+    padding: 40px 20px 20px;
+  }
+
+  .footer-main-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .footer-brand-section {
+    text-align: center;
+  }
+
+  .footer-section-title {
+    font-size: 16px;
+  }
+
+  .payment-methods {
+    justify-content: center;
+  }
+
+  .wa-icon-cont {
+    right: 15px;
+    bottom: 80px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .footer-container {
+    padding: 30px 15px 15px;
+  }
+
+  .footer-main-content {
+    gap: 25px;
+  }
+
+  .footer-logo img {
+    width: 100px;
+  }
+
+  .footer-tagline {
+    font-size: 13px;
+  }
+
+  .payment-logo img {
+    width: 40px;
+  }
+
+  .quick-link-item {
+    padding: 8px;
+  }
+
+  .quick-link-icon {
+    font-size: 20px !important;
+  }
+
+  .quick-link-item span {
+    font-size: 13px;
+  }
+}
