@@ -1,3 +1,7 @@
+.user-accout-details {
+  padding: 40px;
+}
+
 .user-accout-details label {
   color: var(--a) !important;
   font-weight: 600;
@@ -171,6 +175,10 @@
 }
 
 @media screen and (max-width: 768px) {
+  .user-accout-details {
+    padding: 20px;
+  }
+
   .user-accout-details .form-fields {
     padding: 20px;
   }

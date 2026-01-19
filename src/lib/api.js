@@ -87,6 +87,12 @@ export const gameAPI = {
       body: JSON.stringify({ gameId, playerId, serverId }),
     });
   },
+
+  getValidationHistory: async (gameId) => {
+    return apiCall(`/games/${gameId}/validation-history`, {
+      method: "GET",
+    });
+  },
 };
 
 // Order APIs

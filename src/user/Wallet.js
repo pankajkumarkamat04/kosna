@@ -163,14 +163,14 @@ const Wallet = () => {
         <div className="wallet-dash">
           <div className="bal w-100">
             <img width="25px" src={IMAGES.ycoin} className="me-2" alt="" />
-            EZ coins: {parseFloat(balance).toFixed(2)}
+            Coins: {parseFloat(balance).toFixed(2)}
           </div>
           <div className="wallet-dash-tabs">
             <div
               className={`wallet-dash-card ${tab === 1 && "active"}`}
               onClick={() => setTab(1)}
             >
-              Add EZ Coins
+              Add Coins
               <img width="25px" src={IMAGES.ycoin} alt="" />
             </div>
             <div

@@ -20,10 +20,10 @@ const Footer = () => {
   return (
     <React.Fragment>
       <div className="container-fluid footer-container">
-        {/* WhatsApp Floating Icon */}
+        {/* Telegram Floating Icon */}
         <div className="wa-icon-cont">
-          <Link target="_blank" to="https://wa.me/919954967855">
-            <WhatsAppIcon style={{ fontSize: "40px", color: "#25D366" }} />
+          <Link target="_blank" to="https://t.me/pankajkamat">
+            <TelegramIcon style={{ fontSize: "40px", color: "#fff" }} />
           </Link>
         </div>
 
@@ -63,7 +63,7 @@ const Footer = () => {
             <div className="footer-divider"></div>
             <div className="quick-links-grid">
               <a
-                href="https://t.me/yourtelegram"
+                href="https://t.me/pankajkamat"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="quick-link-item"
@@ -81,7 +81,7 @@ const Footer = () => {
                 <span>Facebook Page</span>
               </a>
               <a
-                href="https://wa.me/919954967855"
+                href="https://t.me/pankajkamat"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="quick-link-item"
@@ -115,7 +115,7 @@ const Footer = () => {
           <div className="copyright-divider"></div>
           <p>©️ {currentYear} KOSAN SHOP. All Rights Reserved.</p>
           <p className="copyright-subtext">
-            Made with ❤️ for Gamers | Powered by Premium Gaming Solutions
+            Made with ❤️ for Gamers
           </p>
         </div>
       </div>

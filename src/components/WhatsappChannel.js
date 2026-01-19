@@ -7,14 +7,14 @@ const WhatsappChannel = () => {
       <div
         className="whatsapplink"
         onClick={() =>
-          window.open("https://whatsapp.com/channel/0029Vb9Vxvp4IBhNV9xatm2L")
+          window.open("https://t.me/pankajkamat")
         }
       >
         <div className="image">
-          <img src={IMAGES.wa} alt="" />
+          <img src={IMAGES.telegram} alt="" />
         </div>
         <div className="msg">
-          <p>Join our whatsapp channel!</p>
+          <p>Join our Telegram channel!</p>
           <h6>
             Stay updated for weekly pass giveaways, offers and updates! Join now
           </h6>

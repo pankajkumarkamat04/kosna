@@ -43,6 +43,7 @@ const ProductInfo = () => {
   const [checkLoading, setCheckLoading] = useState(false);
   const [validationStatus, setValidationStatus] = useState(null); // 'valid', 'invalid', 'checking', null
   const [loading, setLoading] = useState(false); // Payment loading state
+  const [validationHistory, setValidationHistory] = useState([]);
 
   const [packCategory, setPackCategory] = useState(null);
   const [allCategory, setAllCategory] = useState(null);
@@ -65,7 +66,7 @@ const ProductInfo = () => {
     const selectedPack = product?.cost?.find(
       (item) => item.amount === selectedDescription
     );
-    
+
     if (selectedPack) {
       if (user?.reseller === "yes") {
         setSelectedPrice(selectedPack.resPrice);
@@ -74,7 +75,7 @@ const ProductInfo = () => {
         setSelectedPrice(selectedPack.price);
         setFinalAmount(selectedPack.price);
       }
-      
+
       setProductId(selectedPack.id);
       setPackId(selectedPack.prodId);
     }
@@ -84,7 +85,7 @@ const ProductInfo = () => {
     try {
       // Get game by ID from URL parameter
       const gameId = params._id;
-      
+
       if (!gameId) {
         message.error("Game ID not provided");
         return;
@@ -93,13 +94,13 @@ const ProductInfo = () => {
       // Get all games and find the one matching the ID
       const gamesResponse = await gameAPI.getAllGames();
       const gamesData = await gamesResponse.json();
-      
+
       if (gamesData.success && gamesData.games) {
         // Find game by ID
         const game = gamesData.games.find(
           (g) => g._id === gameId || g.id === gameId
         );
-        
+
         if (!game) {
           message.error("Game not found");
           return;
@@ -108,60 +109,60 @@ const ProductInfo = () => {
         // Get diamond packs for this game
         try {
           const packsResponse = await gameAPI.getDiamondPacks(game._id);
-          
+
           // Check if response is ok
           if (!packsResponse.ok) {
             const errorData = await packsResponse.json().catch(() => ({}));
             message.error(errorData.message || "Failed to load diamond packs. Please try again.");
             return;
           }
-          
+
           const packsData = await packsResponse.json();
-          
+
           // Handle the actual API response structure
           const packs = packsData.diamondPacks || packsData.packs || packsData.data || [];
-          
+
           // Extract gameData from the response if available
           const gameData = packsData.gameData || null;
-          
+
           if (packsData.success && packs.length > 0) {
-          // Transform the data structure to match what the component expects
-          const transformedProduct = {
-            ...game,
-            // Include gameData from the API response
-            gameData: gameData || game.gameData || null,
-            cost: packs.map((pack) => ({
-              amount: pack.description || pack.amount, // Use description as the display amount
-              price: pack.amount, // amount is the price in the API
-              resPrice: pack.amount, // No reseller price in API, use same as price
-              id: pack._id,
-              prodId: pack._id,
-              prodCategory: pack.category || "default",
-              pimg: pack.logo, // Add logo for package image
-              fakePrice: pack.amount, // For display purposes
-              packData: pack.description, // Description for pack data
-            })),
-          };
-          
-          setProduct(transformedProduct);
-          const defaultAmount = transformedProduct?.cost?.[0]?.amount;
-          setAmount(defaultAmount);
+            // Transform the data structure to match what the component expects
+            const transformedProduct = {
+              ...game,
+              // Include gameData from the API response
+              gameData: gameData || game.gameData || null,
+              cost: packs.map((pack) => ({
+                amount: pack.description || pack.amount, // Use description as the display amount
+                price: pack.amount, // amount is the price in the API
+                resPrice: pack.amount, // No reseller price in API, use same as price
+                id: pack._id,
+                prodId: pack._id,
+                prodCategory: pack.category || "default",
+                pimg: pack.logo, // Add logo for package image
+                fakePrice: pack.amount, // For display purposes
+                packData: pack.description, // Description for pack data
+              })),
+            };
 
-          const defaultPackId = transformedProduct?.cost?.[0]?.prodId;
-          setPackId(defaultPackId);
+            setProduct(transformedProduct);
+            const defaultAmount = transformedProduct?.cost?.[0]?.amount;
+            setAmount(defaultAmount);
 
-          const defaultId = transformedProduct?.cost?.[0]?.id;
-          setProductId(defaultId);
+            const defaultPackId = transformedProduct?.cost?.[0]?.prodId;
+            setPackId(defaultPackId);
 
-          const defaultCategory = transformedProduct?.cost?.[0]?.prodCategory;
-          setPackCategory(defaultCategory);
+            const defaultId = transformedProduct?.cost?.[0]?.id;
+            setProductId(defaultId);
 
-          const defaultPrice =
-            user?.reseller === "yes"
-              ? transformedProduct?.cost?.[0]?.resPrice
-              : transformedProduct?.cost?.[0]?.price;
-          setSelectedPrice(defaultPrice);
-          setFinalAmount(defaultPrice);
+            const defaultCategory = transformedProduct?.cost?.[0]?.prodCategory;
+            setPackCategory(defaultCategory);
+
+            const defaultPrice =
+              user?.reseller === "yes"
+                ? transformedProduct?.cost?.[0]?.resPrice
+                : transformedProduct?.cost?.[0]?.price;
+            setSelectedPrice(defaultPrice);
+            setFinalAmount(defaultPrice);
           } else {
             // If no packs but success, show warning instead of error
             if (packsData.success !== false) {
@@ -187,6 +188,24 @@ const ProductInfo = () => {
     getProduct();
   }, []);
 
+  const getValidationHistory = async (gameId) => {
+    try {
+      const response = await gameAPI.getValidationHistory(gameId);
+      const res = await response.json();
+      if (res.success) {
+        setValidationHistory(res.validationHistory);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (product?._id || product?.id) {
+      getValidationHistory(product._id || product.id);
+    }
+  }, [product]);
+
   // Order ID generation moved to checkout page
 
   // Get validation fields from gameData or fallback to old structure
@@ -208,18 +227,18 @@ const ProductInfo = () => {
 
   const validationFields = getValidationFields();
   // Check for playerId (case-insensitive and handle variations)
-  const requiresPlayerId = validationFields.some(field => 
-    field?.toLowerCase() === "playerid" || 
+  const requiresPlayerId = validationFields.some(field =>
+    field?.toLowerCase() === "playerid" ||
     field?.toLowerCase() === "player_id" ||
     field === "playerId"
   );
   // Check for server (case-insensitive and handle variations)
-  const requiresServer = validationFields.some(field => 
-    field?.toLowerCase() === "server" || 
+  const requiresServer = validationFields.some(field =>
+    field?.toLowerCase() === "server" ||
     field?.toLowerCase() === "servers" ||
     field === "server"
   );
-  
+
   // Check for regionList in gameData or directly on product
   const regionList = product?.gameData?.regionList || product?.regionList;
   const hasRegionList = regionList && Array.isArray(regionList) && regionList.length > 0;
@@ -237,13 +256,13 @@ const ProductInfo = () => {
       const gameId = product?.gameData?._id || product?._id;
       const response = await gameAPI.validateUser(gameId, userId, zoneId || "");
       const res = await response.json();
-      
+
       // Check if response was successful (HTTP 200-299)
       const isHttpSuccess = response.ok;
-      
+
       // Check for new API response structure: response: true or valid: true or success: true
       const isValid = isHttpSuccess && (res.response === true || res.valid === true || res.success === true);
-      
+
       if (isValid) {
         // Get nickname from data.nickname or name field
         const nickname = res.data?.nickname || res.name || "Validated";
@@ -276,9 +295,9 @@ const ProductInfo = () => {
       const hasRequiredFields = requiresPlayerId && requiresServer
         ? userId && zoneId
         : requiresPlayerId
-        ? userId
-        : false;
-      
+          ? userId
+          : false;
+
       if (hasRequiredFields) {
         const timeoutId = setTimeout(async () => {
           try {
@@ -287,13 +306,13 @@ const ProductInfo = () => {
             const gameId = product?.gameData?._id || product?._id;
             const response = await gameAPI.validateUser(gameId, userId, zoneId || "");
             const res = await response.json();
-            
+
             // Check if response was successful (HTTP 200-299)
             const isHttpSuccess = response.ok;
-            
+
             // Check for new API response structure: response: true or valid: true or success: true
             const isValid = isHttpSuccess && (res.response === true || res.valid === true || res.success === true);
-            
+
             if (isValid) {
               // Get nickname from data.nickname or name field
               const nickname = res.data?.nickname || res.name;
@@ -342,7 +361,7 @@ const ProductInfo = () => {
 
     try {
       setLoading('wallet');
-      
+
       const response = await orderAPI.createOrderWithWallet({
         diamondPackId: productId,
         playerId: userId,
@@ -351,13 +370,13 @@ const ProductInfo = () => {
       });
 
       const res = await response.json();
-      
+
       if (res.success) {
         message.success(res.message || "Order placed successfully");
-        
+
         // Get orderId from response
         const orderId = res.orderId;
-        
+
         if (orderId) {
           // Navigate to order status page with orderId
           navigate(`/order-status?orderId=${orderId}`);
@@ -390,7 +409,7 @@ const ProductInfo = () => {
 
     try {
       setLoading('upi');
-      
+
       const response = await orderAPI.createOrderWithUPI({
         diamondPackId: productId,
         playerId: userId,
@@ -400,20 +419,20 @@ const ProductInfo = () => {
       });
 
       const res = await response.json();
-      
+
       if (res.success) {
         // Check if we have a redirect_url (gateway response with success)
         if (res.redirect_url) {
           const url = new URL(res.redirect_url);
           const client_txn_id = url.searchParams.get('client_txn_id');
-          
+
           if (client_txn_id) {
             // Redirect to order status page
             navigate(`/order-status?orderId=${client_txn_id}`);
             return;
           }
         }
-        
+
         // Check if we have a payment URL to redirect to gateway
         if (res.transaction?.paymentUrl) {
           message.success("Redirecting to payment gateway...");
@@ -422,7 +441,7 @@ const ProductInfo = () => {
           }, 500);
           return;
         }
-        
+
         // Check if we have status SCANNING or similar (mobagateway response)
         if (res.status === "SCANNING" || res.client_txn_id || res.udf1) {
           const orderId = res.client_txn_id || res.udf1;
@@ -431,7 +450,7 @@ const ProductInfo = () => {
             return;
           }
         }
-        
+
         message.error("Payment response format not recognized");
       } else {
         message.error(res.message || "Failed to create UPI payment");
@@ -473,14 +492,14 @@ const ProductInfo = () => {
   // Function to get the most used image for each category (memoized for performance)
   const categoryImageMap = useMemo(() => {
     if (!product?.cost || product.cost.length === 0) return {};
-    
+
     const imageMap = {};
     const categories = [...new Set(product.cost.map(item => item.prodCategory))];
-    
+
     categories.forEach(category => {
       // Get all packages in this category
       const categoryPackages = product.cost.filter(item => item.prodCategory === category);
-      
+
       // Count image occurrences
       const imageCount = {};
       categoryPackages.forEach(pkg => {
@@ -488,7 +507,7 @@ const ProductInfo = () => {
           imageCount[pkg.pimg] = (imageCount[pkg.pimg] || 0) + 1;
         }
       });
-      
+
       // Find the most used image
       let mostUsedImage = null;
       let maxCount = 0;
@@ -498,15 +517,15 @@ const ProductInfo = () => {
           mostUsedImage = img;
         }
       });
-      
+
       // If no image found, use the first package's image
       if (!mostUsedImage && categoryPackages.length > 0) {
         mostUsedImage = categoryPackages[0].pimg;
       }
-      
+
       imageMap[category] = mostUsedImage;
     });
-    
+
     return imageMap;
   }, [product?.cost]);
 
@@ -525,13 +544,13 @@ const ProductInfo = () => {
         {/* SECTION ONE P DETAILS */}
         <div className="section section1">
           <div className="image">
-            <img 
+            <img
               src={
                 product?.image?.startsWith('http://') || product?.image?.startsWith('https://')
                   ? product?.image
                   : `${website.link}/${product?.image}`
-              } 
-              alt="image" 
+              }
+              alt="image"
             />
           </div>
           <div className="game-title">
@@ -552,9 +571,8 @@ const ProductInfo = () => {
                   return (
                     <div key={index}>
                       <div
-                        className={`pc ${
-                          packCategory === item?.prodCategory && "active"
-                        }`}
+                        className={`pc ${packCategory === item?.prodCategory && "active"
+                          }`}
                         onClick={() => setPackCategory(item?.prodCategory)}
                       >
                         {categoryImage && <img src={categoryImage} alt="" />}
@@ -585,17 +603,16 @@ const ProductInfo = () => {
                         setTimeout(() => {
                           const enterDetailsElement = document.getElementById('EnterDetails');
                           if (enterDetailsElement) {
-                            enterDetailsElement.scrollIntoView({ 
-                              behavior: 'smooth', 
-                              block: 'start' 
+                            enterDetailsElement.scrollIntoView({
+                              behavior: 'smooth',
+                              block: 'start'
                             });
                           }
                         }, 100);
                       }}
                       key={index}
-                      className={`amount ${
-                        amount === item?.amount && "active"
-                      }`}
+                      className={`amount ${amount === item?.amount && "active"
+                        }`}
                     >
                       <img src={displayImage} alt="" />
                       <span>
@@ -612,7 +629,7 @@ const ProductInfo = () => {
                 })}
             </div>
           </div>
-          
+
           {/* Validation Section - Above Proceed To Checkout */}
           {(requiresPlayerId || requiresServer || product?.playerCheckBtn === "yes") && (
             <div className="section section2" id="EnterDetails" style={{ marginTop: "20px" }}>
@@ -683,8 +700,8 @@ const ProductInfo = () => {
                       <span>User validation failed. Please check your details.</span>
                     </div>
                   )}
-                  <button 
-                    className="validate-btn" 
+                  <button
+                    className="validate-btn"
                     onClick={handleCheckPlayer}
                     disabled={!userId || (requiresServer && !zoneId) || checkLoading}
                   >
@@ -693,9 +710,42 @@ const ProductInfo = () => {
                   </button>
                 </div>
               )}
+              {/* Validation History */}
+              {validationHistory?.length > 0 && (
+                <div className="validation-history mt-3">
+                  <h6 style={{ fontSize: "14px", color: "rgba(255,255,255,0.7)" }}>Recent Validations</h6>
+                  <div className="history-list d-flex flex-wrap gap-2">
+                    {validationHistory.map((item) => (
+                      <div
+                        key={item._id}
+                        className="history-item"
+                        style={{
+                          background: "rgba(1, 255, 253, 0.1)",
+                          border: "1px solid rgba(1, 255, 253, 0.2)",
+                          padding: "5px 10px",
+                          borderRadius: "5px",
+                          cursor: "pointer",
+                          fontSize: "12px",
+                          color: "#fff"
+                        }}
+                        onClick={() => {
+                          setUserId(item.playerId);
+                          if (item.server) setZoneId(item.server);
+                          if (item.playerName) setPlayerCheck(item.playerName);
+                          // Optional: Auto validate or just fill
+                        }}
+                      >
+                        <span className="player-id fw-bold">{item.playerId}</span>
+                        {item.server && <span className="server ms-1">({item.server})</span>}
+                        {item.playerName && <span className="player-name ms-1 text-info">- {item.playerName}</span>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           )}
-          
+
           {/* Payment Options */}
           {amount && selectedPrice && (
             <div className="payment-section mt-4">
@@ -705,7 +755,7 @@ const ProductInfo = () => {
                   Please validate your user details before selecting a payment method.
                 </div>
               )}
-              
+
               <div className={`payment-options ${product?.playerCheckBtn === "yes" && validationStatus !== 'valid' ? 'disabled' : ''}`}>
                 {/* Wallet Payment */}
                 <div className="payment-method wallet-payment">

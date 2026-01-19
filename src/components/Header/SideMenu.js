@@ -77,12 +77,7 @@ const SideMenu = ({ sideMenu, setSideMenu }) => {
               </Link>
             </li>
           )}
-          <li>
-            <Link to="https://wa.me/919954967855" target="_blank">
-              <WhatsAppIcon className="icon me-2 menuicon" />
-              24/7 Chat Support
-            </Link>
-          </li>
+
           <hr className="text-white" />
           {!user && (
             <div className="signin-btn-container">

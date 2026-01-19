@@ -43,13 +43,7 @@ const StickyFooter = () => {
           <span className="footer-tab-label">Home</span>
         </div>
 
-        <div
-          onClick={() => navigate("/games")}
-          className={`footer-tab ${location.pathname === "/games" && "active"}`}
-        >
-          <SportsEsportsIcon className="footer-tab-icon" />
-          <span className="footer-tab-label">Games</span>
-        </div>
+
 
         {user && (
           <div

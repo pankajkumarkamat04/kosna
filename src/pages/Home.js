@@ -12,6 +12,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import TelegramIcon from "@mui/icons-material/Telegram";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { message } from "antd";
 import "./Home.css";
@@ -141,9 +142,9 @@ const Home = () => {
             <ReceiptIcon className="action-icon" />
             <span>Transactions</span>
           </div>
-          <div className="action-button" onClick={() => window.open("https://wa.me/919954967855", "_blank")}>
-            <WhatsAppIcon className="action-icon" />
-            <span>WhatsApp</span>
+          <div className="action-button" onClick={() => window.open("https://t.me/pankajkamat", "_blank")}>
+            <TelegramIcon className="action-icon" />
+            <span>Telegram</span>
           </div>
         </div>
 
