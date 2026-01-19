@@ -35,7 +35,7 @@ const Login = () => {
         const filteredSuggestions = emailDomains
           .filter((domain) => domain.toLowerCase().startsWith(domainPart.toLowerCase()))
           .map((domain) => `${localPart}@${domain}`);
-        
+
         setSuggestions(filteredSuggestions);
         setShowSuggestions(filteredSuggestions.length > 0 && domainPart !== filteredSuggestions[0]?.split("@")[1]);
       } else {
@@ -134,7 +134,7 @@ const Login = () => {
                     {emailError}
                   </div>
                 )}
-                
+
                 {/* Email suggestions dropdown */}
                 {showSuggestions && suggestions.length > 0 && (
                   <div
@@ -143,7 +143,7 @@ const Login = () => {
                       top: "100%",
                       left: 0,
                       right: 0,
-                      backgroundColor: "#fff",
+                      backgroundColor: "#0d1b2a",
                       border: "1px solid var(--a)",
                       borderRadius: "8px",
                       marginTop: "4px",
@@ -160,13 +160,13 @@ const Login = () => {
                         style={{
                           padding: "10px 16px",
                           cursor: "pointer",
-                          color: "#333",
+                          color: "#fff",
                           fontSize: "14px",
-                          borderBottom: index < suggestions.length - 1 ? "1px solid #f0f0f0" : "none",
+                          borderBottom: index < suggestions.length - 1 ? "1px solid rgba(255, 255, 255, 0.1)" : "none",
                           transition: "background-color 0.2s ease",
                         }}
                         onMouseEnter={(e) => {
-                          e.target.style.backgroundColor = "rgba(1, 255, 253, 0.1)";
+                          e.target.style.backgroundColor = "rgba(1, 255, 253, 0.15)";
                         }}
                         onMouseLeave={(e) => {
                           e.target.style.backgroundColor = "transparent";
