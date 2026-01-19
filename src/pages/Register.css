@@ -2,9 +2,11 @@
   padding: 100px 20px;
   background: var(--bg);
 }
+
 .register-container h6 {
   color: #fff;
 }
+
 .register-container .form {
   padding: 20px;
   border: 1px solid rgba(0, 0, 0, 0.5);
@@ -14,6 +16,7 @@
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
 }
+
 .form-fields input,
 .form-fields select,
 .form-fields textarea {
@@ -49,21 +52,25 @@
   border-color: rgba(255, 255, 255, 0.3) !important;
   background-color: rgba(12, 21, 43, 0.7) !important;
 }
+
 .register-form h1 {
   font-weight: 400;
   color: #000;
 }
+
 .register-btn {
   width: 100%;
   background-color: var(--a);
   padding: 10px 15px;
-  color: var(--b);
+  color: #000;
   font-weight: 600;
   border-radius: 10px;
+
   &:hover {
     opacity: 0.9;
   }
 }
+
 .apply-code-btn {
   padding: 8px 15px;
   width: 180px;
@@ -71,14 +78,17 @@
   color: #fff;
   outline: transparent;
   border: transparent;
+
   &:hover {
     opacity: 0.8;
   }
 }
+
 .hr-line {
   position: relative;
   margin-bottom: 20px;
 }
+
 .hr-line::before {
   content: "";
   position: absolute;
@@ -89,9 +99,11 @@
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 0 !important;
 }
+
 .forgot-pass h6 {
   color: #fff !important;
 }
+
 .forgot-pass a {
   color: var(--a);
   text-decoration: underline !important;
@@ -109,16 +121,19 @@
   justify-content: center;
   align-items: center;
 }
+
 .ppform {
   padding: 10px;
   background: #fff;
   width: 40%;
   border-radius: 10px;
+
   p {
     font-weight: bold;
     text-align: center;
     margin-bottom: 10px;
   }
+
   .registerbtn {
     margin-top: 10px;
     background: var(--bg);
@@ -130,18 +145,22 @@
     width: 100%;
   }
 }
+
 .or {
   margin: 10px 0;
   color: #fff;
 }
+
 @media screen and (max-width: 786px) {
   .register-container {
     padding: 100px 20px;
     background: var(--bg);
   }
+
   .forgot-pass h6 {
     font-size: 12px;
   }
+
   .ppform {
     width: 90%;
   }

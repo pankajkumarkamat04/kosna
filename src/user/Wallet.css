@@ -1,436 +1,269 @@
+/* Wallet Page - Premium Redesign */
+
 .wallet-dash {
   display: flex;
   flex-direction: column;
-  padding: 20px 0;
-  padding-top: 0;
+  padding: 40px;
   width: 100%;
-  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 30px;
 }
 
+/* Balance Card */
 .bal {
   width: 100%;
-  background: linear-gradient(135deg, var(--a), rgba(1, 255, 253, 0.8));
-  color: #0a192f !important;
-  padding: 20px 25px;
-  border-radius: 16px;
-  border: 2px solid var(--a);
-  box-shadow: 0 8px 25px rgba(1, 255, 253, 0.3);
-  font-weight: 600;
-  font-size: 18px;
+  background: linear-gradient(135deg, rgba(1, 255, 253, 0.15), rgba(1, 255, 253, 0.05));
+  color: #fff !important;
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid rgba(1, 255, 253, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  font-weight: 700;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
   transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.bal img {
+  width: 32px;
+  margin-right: 15px;
+  filter: drop-shadow(0 0 5px rgba(255, 202, 0, 0.5));
 }
 
 .bal:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(1, 255, 253, 0.4);
+  transform: translateY(-2px);
+  border-color: var(--a);
+  box-shadow: 0 15px 40px rgba(1, 255, 253, 0.1);
 }
 
-/* Container for the two tab cards to keep them in one row */
+/* Tabs Section */
 .wallet-dash-tabs {
   display: flex;
-  flex-direction: row;
-  gap: 15px;
+  gap: 20px;
   width: 100%;
 }
 
 .wallet-dash-card {
   flex: 1;
-  padding: 16px 20px;
-  background: linear-gradient(135deg, rgba(1, 255, 253, 0.08), rgba(1, 255, 253, 0.03));
-  border: 2px solid rgba(1, 255, 253, 0.3);
-  color: rgba(255, 255, 255, 0.7) !important;
+  padding: 20px 25px;
+  background: rgba(10, 25, 47, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6) !important;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 12px;
+  border-radius: 16px;
   transition: all 0.3s ease;
-  min-width: 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.wallet-dash-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(1, 255, 253, 0.1), transparent);
-  transition: left 0.5s ease;
-}
-
-.wallet-dash-card:hover::before {
-  left: 100%;
+  font-weight: 500;
+  font-size: 16px;
 }
 
 .wallet-dash-card:hover {
-  background: linear-gradient(135deg, rgba(1, 255, 253, 0.12), rgba(1, 255, 253, 0.06));
-  border-color: var(--a);
+  background: rgba(1, 255, 253, 0.05);
+  border-color: rgba(1, 255, 253, 0.3);
   color: #fff !important;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(1, 255, 253, 0.2);
 }
 
 .wallet-dash-card.active {
-  background: linear-gradient(135deg, rgba(1, 255, 253, 0.2), rgba(1, 255, 253, 0.1));
+  background: linear-gradient(135deg, rgba(1, 255, 253, 0.1), rgba(1, 255, 253, 0.02));
   border-color: var(--a);
-  color: #fff !important;
-  box-shadow: 0 6px 20px rgba(1, 255, 253, 0.3);
+  color: var(--a) !important;
+  box-shadow: 0 5px 20px rgba(1, 255, 253, 0.1);
 }
 
+.wallet-dash-card img,
+.wallet-dash-card .icon {
+  width: 24px;
+  font-size: 24px;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.wallet-dash-card.active img,
+.wallet-dash-card.active .icon {
+  opacity: 1;
+  filter: drop-shadow(0 0 5px var(--a));
+}
+
+/* Add Money Section */
 .add-money {
+  background: rgba(10, 25, 47, 0.4);
+  border-radius: 20px;
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
-  width: 100%;
-  gap: 20px;
-}
-
-.amount-tabs {
-  color: #fff !important;
-  width: 100%;
-}
-
-.bar-img {
-  width: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 40px;
 }
 
 .txn-details {
-  width: 50%;
-}
-
-.bar-img img {
   width: 100%;
-  max-width: 400px;
-  filter: drop-shadow(0 0 20px rgba(1, 255, 253, 0.3));
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.txn-btns {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-
-.txn-btns button {
-  background: linear-gradient(135deg, rgba(1, 255, 253, 0.08), rgba(1, 255, 253, 0.03));
-  border: 2px solid rgba(1, 255, 253, 0.3);
-  color: rgba(255, 255, 255, 0.8) !important;
-  padding: 10px 20px;
-  outline: transparent;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 500;
-}
-
-.txn-btns button:hover {
-  background: linear-gradient(135deg, rgba(1, 255, 253, 0.15), rgba(1, 255, 253, 0.08));
-  border-color: var(--a);
+.txn-details input {
+  background: rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
   color: #fff !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(1, 255, 253, 0.2);
-}
-
-.txn-btns button.active {
-  background: linear-gradient(135deg, var(--a), rgba(1, 255, 253, 0.8));
-  border-color: var(--a);
-  color: #0a192f !important;
-  box-shadow: 0 6px 20px rgba(1, 255, 253, 0.4);
-}
-
-/* COIN CONTAINER  */
-.add-coin-container h4 {
-  margin-bottom: 25px;
-  color: var(--a) !important;
-  font-size: 22px;
-  font-weight: 600;
-}
-
-.add-coin-container .buy-now {
-  padding: 15px;
-  margin-top: 15px;
-}
-
-.coin-container {
-  display: flex;
-  flex-wrap: wrap;
+  padding: 15px 20px !important;
+  border-radius: 12px !important;
+  font-size: 16px !important;
   width: 100%;
-  justify-content: space-between;
-  gap: 15px;
-}
-
-.coin {
-  width: calc(33.333% - 10px);
-  min-width: 150px;
-  background: linear-gradient(135deg, rgba(1, 255, 253, 0.08), rgba(1, 255, 253, 0.03));
-  border: 2px solid rgba(1, 255, 253, 0.3);
-  padding: 20px 15px;
-  text-align: center;
-  cursor: pointer;
-  border-radius: 12px;
   transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
 }
 
-.coin::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(1, 255, 253, 0.1), transparent);
-  transition: left 0.5s ease;
+.txn-details input:focus {
+  border-color: var(--a) !important;
+  box-shadow: 0 0 0 2px rgba(1, 255, 253, 0.1) !important;
+  background: rgba(0, 0, 0, 0.3) !important;
 }
 
-.coin:hover::before {
-  left: 100%;
-}
-
-.coin p:nth-child(1) {
-  margin: 0;
+.theme-btn {
+  background: linear-gradient(135deg, var(--a), #00d4d2);
+  color: #000 !important;
   font-weight: 700;
-  font-size: 20px;
-  color: var(--a) !important;
-  margin-bottom: 8px;
-}
-
-.coin p:nth-child(2) {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.8) !important;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.coin:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(1, 255, 253, 0.3);
-  border-color: var(--a);
-  background: linear-gradient(135deg, rgba(1, 255, 253, 0.15), rgba(1, 255, 253, 0.08));
-}
-
-.coin.active {
-  border: 2px solid var(--a);
-  background: linear-gradient(135deg, rgba(1, 255, 253, 0.2), rgba(1, 255, 253, 0.1));
-  box-shadow: 0 8px 25px rgba(1, 255, 253, 0.4);
-  transform: translateY(-5px);
-}
-
-.payment-containerr {
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
   width: 100%;
   margin-top: 20px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.payment-containerr .title {
-  color: var(--a) !important;
-  margin: 0 0 15px 0;
-  font-size: 18px;
-  font-weight: 600;
+.theme-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(1, 255, 253, 0.25);
 }
 
-.payment-containerr .payment {
-  width: 100%;
+/* History Section Styles */
+.tools {
+  background: rgba(10, 25, 47, 0.6);
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Mobile History Cards */
+.wallet-history-mobile {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-direction: column;
   gap: 15px;
 }
 
-.payment-containerr .upi {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 2px solid rgba(1, 255, 253, 0.3);
-  border-radius: 12px;
-  padding: 15px 20px;
-  background: linear-gradient(135deg, rgba(1, 255, 253, 0.08), rgba(1, 255, 253, 0.03));
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.payment-containerr .upi::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(1, 255, 253, 0.1), transparent);
-  transition: left 0.5s ease;
-}
-
-.payment-containerr .upi:hover::before {
-  left: 100%;
-}
-
-.payment-containerr .upi:hover {
-  border-color: var(--a);
-  background: linear-gradient(135deg, rgba(1, 255, 253, 0.15), rgba(1, 255, 253, 0.08));
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(1, 255, 253, 0.2);
-}
-
-.payment-containerr p {
-  color: rgba(255, 255, 255, 0.9) !important;
-  font-weight: 600;
-  margin: 0;
-}
-
-.payment-containerr .upi.active {
-  background: linear-gradient(135deg, rgba(1, 255, 253, 0.2), rgba(1, 255, 253, 0.1));
-  border-color: var(--a);
-  box-shadow: 0 6px 20px rgba(1, 255, 253, 0.3);
-}
-
-.payment-containerr .upi.active p {
-  color: #fff !important;
-}
-
-.payment-containerr .upi img {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-}
-
-.payment-secured {
-  color: rgba(255, 255, 255, 0.7) !important;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 15px;
-  font-size: 14px;
-}
-
-.payment-secured .icon {
-  color: var(--a) !important;
-  margin-right: 8px;
-  font-size: 20px;
-}
-
-.add-money h6 {
-  color: var(--a) !important;
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 15px;
-}
-
-.confirmbtn {
-  background: linear-gradient(135deg, var(--a), rgba(1, 255, 253, 0.8));
-  color: #0a192f !important;
-  border-radius: 12px;
-  outline: transparent;
-  border: transparent;
-  padding: 14px 28px;
-  font-weight: 600;
-  font-size: 15px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(1, 255, 253, 0.3);
-}
-
-.confirmbtn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(1, 255, 253, 0.5);
-}
-
-/* MOBILE HISTORY */
-.wallet-history-mobile {
-  background: linear-gradient(135deg, rgba(1, 255, 253, 0.05), rgba(1, 255, 253, 0.02));
-  border: 2px solid rgba(1, 255, 253, 0.2);
+.whistory {
+  background: rgba(10, 25, 47, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   padding: 20px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-.wallet-history-mobile .whistory {
-  border: 2px solid rgba(1, 255, 253, 0.3);
-  background: linear-gradient(135deg, rgba(1, 255, 253, 0.08), rgba(1, 255, 253, 0.03));
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 12px;
   transition: all 0.3s ease;
 }
 
-.wallet-history-mobile .whistory:hover {
-  border-color: var(--a);
-  background: linear-gradient(135deg, rgba(1, 255, 253, 0.12), rgba(1, 255, 253, 0.06));
+.whistory:hover {
+  border-color: rgba(1, 255, 253, 0.3);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(1, 255, 253, 0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.wallet-history-mobile .whistory .items {
+.whistory .items {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.wallet-history-mobile .whistory .items span {
+.whistory .items:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.whistory .items span:first-child {
+  color: rgba(255, 255, 255, 0.5);
   font-size: 13px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 500;
 }
 
+.whistory .items span:last-child {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Text Colors */
+.text-success {
+  color: #00e676 !important;
+}
+
+.text-danger {
+  color: #ff4444 !important;
+}
+
+.text-warning {
+  color: #ffd700 !important;
+}
+
+.text-primary {
+  color: var(--a) !important;
+}
+
+/* Responsive */
 @media screen and (max-width: 992px) {
-  .wallet-dash-card {
-    width: 100%;
+  .wallet-dash {
+    padding: 30px;
   }
 
-  .add-money {
-    padding: 0;
+  .wallet-dash-tabs {
     flex-wrap: wrap;
   }
 
-  .bar-img {
-    width: 100%;
-  }
-
-  .txn-details {
-    width: 100%;
-  }
-
-  .coin {
-    width: calc(50% - 8px);
+  .wallet-dash-card {
+    min-width: 200px;
   }
 }
 
 @media screen and (max-width: 768px) {
   .wallet-dash {
-    padding: 15px 0;
-    gap: 15px;
+    padding: 20px;
+    gap: 20px;
   }
 
   .bal {
-    padding: 15px 20px;
-    font-size: 16px;
+    padding: 20px;
+    font-size: 20px;
   }
 
   .wallet-dash-tabs {
     flex-direction: column;
+    gap: 10px;
   }
 
-  .coin-container {
-    gap: 12px;
-  }
-}
-
-@keyframes zoomInOut {
-  0% {
-    transform: scale(1);
+  .wallet-dash-card {
+    padding: 15px 20px;
   }
 
-  50% {
-    transform: scale(1.1);
+  .add-money {
+    padding: 20px;
   }
 
-  100% {
-    transform: scale(1);
+  .tools.d-flex {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  .tools input {
+    width: 100% !important;
+  }
+
+  .tools button {
+    width: 100%;
+    justify-content: center;
   }
 }

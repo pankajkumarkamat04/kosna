@@ -44,86 +44,88 @@ const Dashboard = () => {
   return (
     <Layout>
       <DashboardLayout>
-        <div className="dashboard-header">
-          <h4 className="dashboard-title">Dashboard</h4>
-        </div>
-        <div className="user-dashboard">
-          <div className="shadow dash-card" onClick={() => navigate("/orders")}>
-            <div className="dash-card-content">
-              <div className="dash-card-info">
-                <div className="dash-card-number">
-                  {loading ? (
-                    <div className="loading-spinner"></div>
-                  ) : (
-                    <b>{allOrders?.length || 0}</b>
-                  )}
+        <div className="dashboard-main-wrapper">
+          <div className="dashboard-header">
+            <h4 className="dashboard-title">Dashboard</h4>
+          </div>
+          <div className="user-dashboard">
+            <div className="shadow dash-card" onClick={() => navigate("/orders")}>
+              <div className="dash-card-content">
+                <div className="dash-card-info">
+                  <div className="dash-card-number">
+                    {loading ? (
+                      <div className="loading-spinner"></div>
+                    ) : (
+                      <b>{allOrders?.length || 0}</b>
+                    )}
+                  </div>
+                  <span className="dash-card-label">Total Orders</span>
                 </div>
-                <span className="dash-card-label">Total Orders</span>
-              </div>
-              <div className="dash-card-icon">
-                <InstallMobileIcon />
+                <div className="dash-card-icon">
+                  <InstallMobileIcon />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="shadow dash-card" onClick={() => navigate("/wallet")}>
-            <div className="dash-card-content">
-              <div className="dash-card-info">
-                <div className="dash-card-number">
-                  <b>₹{parseFloat(balance || 0).toFixed(2)}</b>
+            <div className="shadow dash-card" onClick={() => navigate("/wallet")}>
+              <div className="dash-card-content">
+                <div className="dash-card-info">
+                  <div className="dash-card-number">
+                    <b>₹{parseFloat(balance || 0).toFixed(2)}</b>
+                  </div>
+                  <span className="dash-card-label">EZ Coins</span>
                 </div>
-                <span className="dash-card-label">EZ Coins</span>
-              </div>
-              <div className="dash-card-icon">
-                <TollIcon />
+                <div className="dash-card-icon">
+                  <TollIcon />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div
-            className="shadow dash-card"
-            onClick={() => navigate("/my-account")}
-          >
-            <div className="dash-card-content">
-              <div className="dash-card-info">
-                <div className="dash-card-number">
-                  <b>{user?.name ? user.name.split(' ')[0] : 'Account'}</b>
+            <div
+              className="shadow dash-card"
+              onClick={() => navigate("/my-account")}
+            >
+              <div className="dash-card-content">
+                <div className="dash-card-info">
+                  <div className="dash-card-number">
+                    <b>{user?.name ? user.name.split(' ')[0] : 'Account'}</b>
+                  </div>
+                  <span className="dash-card-label">My Account</span>
                 </div>
-                <span className="dash-card-label">My Account</span>
-              </div>
-              <div className="dash-card-icon">
-                <AccountCircleIcon />
+                <div className="dash-card-icon">
+                  <AccountCircleIcon />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div
-            className="shadow dash-card"
-            onClick={() => navigate("/payments")}
-          >
-            <div className="dash-card-content">
-              <div className="dash-card-info">
-                <div className="dash-card-number">
-                  <b>--</b>
+            <div
+              className="shadow dash-card"
+              onClick={() => navigate("/payments")}
+            >
+              <div className="dash-card-content">
+                <div className="dash-card-info">
+                  <div className="dash-card-number">
+                    <b>--</b>
+                  </div>
+                  <span className="dash-card-label">Payments</span>
                 </div>
-                <span className="dash-card-label">Payments</span>
-              </div>
-              <div className="dash-card-icon">
-                <PaymentIcon />
+                <div className="dash-card-icon">
+                  <PaymentIcon />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="shadow dash-card" onClick={() => navigate("/query")}>
-            <div className="dash-card-content">
-              <div className="dash-card-info">
-                <div className="dash-card-number">
-                  <b>--</b>
+            <div className="shadow dash-card" onClick={() => navigate("/query")}>
+              <div className="dash-card-content">
+                <div className="dash-card-info">
+                  <div className="dash-card-number">
+                    <b>--</b>
+                  </div>
+                  <span className="dash-card-label">Queries</span>
                 </div>
-                <span className="dash-card-label">Queries</span>
-              </div>
-              <div className="dash-card-icon">
-                <QuestionAnswerIcon />
+                <div className="dash-card-icon">
+                  <QuestionAnswerIcon />
+                </div>
               </div>
             </div>
           </div>

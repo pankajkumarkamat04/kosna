@@ -156,7 +156,10 @@ const Login = () => {
                     {suggestions.map((suggestion, index) => (
                       <div
                         key={index}
-                        onClick={() => handleSuggestionClick(suggestion)}
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          handleSuggestionClick(suggestion);
+                        }}
                         style={{
                           padding: "10px 16px",
                           cursor: "pointer",

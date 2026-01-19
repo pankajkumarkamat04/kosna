@@ -188,20 +188,22 @@ const Wallet = () => {
         {/* TXN HISTORY */}
         {tab === 0 && (
           <>
-            <div className="tools mb-3">
-              <div className="form-fields">
+            <div className="tools mb-4 d-flex align-items-center gap-3" style={{ padding: "0 10px" }}>
+              <div className="form-fields" style={{ flex: "0 0 auto", width: "auto" }}>
                 <input
                   type="date"
                   className="py-2 form-control"
+                  style={{ width: "200px" }}
                   placeholder="Search Order ID"
                   name="addition"
                   onChange={(e) => setSelectedDate(e.target.value)}
                 />
               </div>
 
-              <div className="form-fields">
+              <div className="form-fields" style={{ flex: "0 0 auto", width: "auto" }}>
                 <button
                   className="btn btn-danger"
+                  style={{ height: "45px", display: "flex", alignItems: "center" }}
                   onClick={() => {
                     setSelectedDate("");
                     setHistories(historyData);
@@ -256,10 +258,10 @@ const Wallet = () => {
                     histories?.map((item, index) => {
                       const transactionType = item.udf2 || item.type || "N/A";
                       const productInfo = item.paymentNote || item.product || "N/A";
-                      const statusClass = item.status === "pending" ? "text-warning" : 
-                                        item.status === "success" || item.status === "completed" ? "text-success" :
-                                        item.status === "failed" ? "text-danger" : "text-dark";
-                      
+                      const statusClass = item.status === "pending" ? "text-warning" :
+                        item.status === "success" || item.status === "completed" ? "text-success" :
+                          item.status === "failed" ? "text-danger" : "text-dark";
+
                       return (
                         <tr key={item._id || index}>
                           <td>
@@ -316,10 +318,10 @@ const Wallet = () => {
                 histories?.map((item, index) => {
                   const transactionType = item.udf2 || item.type || "N/A";
                   const productInfo = item.paymentNote || item.product || "N/A";
-                  const statusClass = item.status === "pending" ? "text-warning" : 
-                                    item.status === "success" || item.status === "completed" ? "text-success" :
-                                    item.status === "failed" ? "text-danger" : "text-dark";
-                  
+                  const statusClass = item.status === "pending" ? "text-warning" :
+                    item.status === "success" || item.status === "completed" ? "text-success" :
+                      item.status === "failed" ? "text-danger" : "text-dark";
+
                   return (
                     <div className="whistory" key={item._id || index}>
                       <div className="items">

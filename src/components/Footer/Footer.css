@@ -251,7 +251,7 @@
   }
 
   .payment-methods {
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .wa-icon-cont {

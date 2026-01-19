@@ -1,3 +1,10 @@
+.dashboard-main-wrapper {
+  padding: 40px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .dashboard-header {
   margin-bottom: 30px;
   padding-bottom: 20px;
@@ -142,6 +149,10 @@
 }
 
 @media screen and (max-width: 768px) {
+  .dashboard-main-wrapper {
+    padding: 20px;
+  }
+
   .user-dashboard {
     grid-template-columns: 1fr;
     gap: 15px;

@@ -10,7 +10,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import LoginIcon from "@mui/icons-material/Login";
 import HistoryIcon from "@mui/icons-material/History";
 import EqualizerOutlinedIcon from "@mui/icons-material/EqualizerOutlined";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { message } from "antd";
 import ModeIcon from "@mui/icons-material/Mode";
@@ -21,6 +21,7 @@ import "./SideMenu.css";
 const SideMenu = ({ sideMenu, setSideMenu }) => {
   const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -34,9 +35,8 @@ const SideMenu = ({ sideMenu, setSideMenu }) => {
   };
   return (
     <div
-      className={`sidemenu-container d-block d-md-block d-lg-none ${
-        sideMenu ? "active" : ""
-      }`}
+      className={`sidemenu-container d-block d-md-block d-lg-none ${sideMenu ? "active" : ""
+        }`}
     >
       <div className="sidemenu">
         <div className="logo">
@@ -46,24 +46,23 @@ const SideMenu = ({ sideMenu, setSideMenu }) => {
             className="icon"
           />
         </div>
-        <hr className="text-white" />
         <ul className="p-0 ul">
           <>
-            <li>
+            <li className={location.pathname === "/" ? "active-link" : ""}>
               <Link onClick={() => setSideMenu(!sideMenu)} to="/">
                 <HomeIcon className="icon me-2 menuicon" />
                 Home
               </Link>
             </li>
 
-            <li>
+            <li className={location.pathname === "/wallet" ? "active-link" : ""}>
               <Link onClick={() => setSideMenu(!sideMenu)} to="/wallet">
                 <AccountBalanceWalletIcon className="icon me-2 menuicon" />
                 Wallet
               </Link>
             </li>
 
-            <li>
+            <li className={location.pathname === "/orders" ? "active-link" : ""}>
               <Link onClick={() => setSideMenu(!sideMenu)} to="/orders">
                 <HistoryIcon className="icon me-2 menuicon" />
                 Order History
@@ -71,7 +70,7 @@ const SideMenu = ({ sideMenu, setSideMenu }) => {
             </li>
           </>
           {user && (
-            <li>
+            <li className={location.pathname === "/user-dashboard" ? "active-link" : ""}>
               <Link to="/user-dashboard">
                 <AccountBoxIcon className="icon me-2 menuicon" />
                 My Account
@@ -86,9 +85,9 @@ const SideMenu = ({ sideMenu, setSideMenu }) => {
           </li>
           <hr className="text-white" />
           {!user && (
-            <>
+            <div className="signin-btn-container">
               <button
-                className="signin"
+                className="signin primary"
                 onClick={() => {
                   navigate("/login");
                   setSideMenu(!sideMenu);
@@ -97,15 +96,15 @@ const SideMenu = ({ sideMenu, setSideMenu }) => {
                 Sign In
               </button>
               <button
-                className="signin mt-2"
+                className="signin secondary"
                 onClick={() => {
                   navigate("/register");
                   setSideMenu(!sideMenu);
                 }}
               >
-                Sign Up Its Free
+                Sign Up It's Free
               </button>
-            </>
+            </div>
           )}
           {user && (
             <li className="logout" onClick={handleLogout}>
