@@ -4,7 +4,7 @@ import DashboardLayout from "./components/DashboardLayout";
 import { useNavigate } from "react-router-dom";
 import { orderAPI } from "../lib/api";
 import { useSelector } from "react-redux";
-import { message } from "antd";
+import { message, DatePicker } from "antd";
 import Loader from "../pages/Loader";
 import "./Orders.css";
 
@@ -92,12 +92,12 @@ const Orders = () => {
         <div className="user-order-container">
           <div className="tools mb-3">
             <div className="form-fields">
-              <input
-                type="date"
-                className="py-2 form-control"
-                placeholder="Search Order ID"
-                name="addition"
-                onChange={(e) => setSelectedDate(e.target.value)}
+              <DatePicker
+                className="w-100 custom-datepicker"
+                placeholder="Select Date"
+                onChange={(date, dateString) => setSelectedDate(dateString)}
+                format="YYYY-MM-DD"
+                popupClassName="premium-date-picker-dropdown"
               />
             </div>
 

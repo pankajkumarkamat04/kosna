@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { message } from "antd";
+import { message, DatePicker } from "antd";
 import DashboardLayout from "./components/DashboardLayout";
 import Layout from "../components/Layout/Layout";
 import { walletAPI, transactionAPI } from "../lib/api";
@@ -190,13 +190,13 @@ const Wallet = () => {
           <>
             <div className="tools mb-4 d-flex align-items-center gap-3" style={{ padding: "0 10px" }}>
               <div className="form-fields" style={{ flex: "0 0 auto", width: "auto" }}>
-                <input
-                  type="date"
-                  className="py-2 form-control"
-                  style={{ width: "200px" }}
-                  placeholder="Search Order ID"
-                  name="addition"
-                  onChange={(e) => setSelectedDate(e.target.value)}
+                <DatePicker
+                  className="w-100 custom-datepicker"
+                  placeholder="Select Date"
+                  onChange={(date, dateString) => setSelectedDate(dateString)}
+                  format="YYYY-MM-DD"
+                  popupClassName="premium-date-picker-dropdown"
+                  style={{ minWidth: "200px" }}
                 />
               </div>
 
