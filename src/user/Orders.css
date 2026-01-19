@@ -35,6 +35,13 @@
   justify-content: center;
 }
 
+.user-order-container {
+  padding: 40px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .user-order-container .tools {
   display: flex;
   flex-direction: row;
@@ -151,6 +158,10 @@
 }
 
 @media screen and (max-width: 768px) {
+  .user-order-container {
+    padding: 20px;
+  }
+
   .user-order-container .tools {
     padding: 15px;
   }
