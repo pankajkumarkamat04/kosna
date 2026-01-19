@@ -58,7 +58,6 @@
 
 .user-order-container .tools .form-fields {
   flex: 1;
-  min-width: 200px;
 }
 
 .user-order-container .tools .form-fields:last-child {

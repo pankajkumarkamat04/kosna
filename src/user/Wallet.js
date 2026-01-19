@@ -189,14 +189,13 @@ const Wallet = () => {
         {tab === 0 && (
           <>
             <div className="tools mb-4 d-flex align-items-center gap-3" style={{ padding: "0 10px" }}>
-              <div className="form-fields" style={{ flex: "0 0 auto", width: "auto" }}>
+              <div className="form-fields" style={{ flex: "1" }}>
                 <DatePicker
                   className="w-100 custom-datepicker"
                   placeholder="Select Date"
                   onChange={(date, dateString) => setSelectedDate(dateString)}
                   format="YYYY-MM-DD"
                   popupClassName="premium-date-picker-dropdown"
-                  style={{ minWidth: "200px" }}
                 />
               </div>
 
