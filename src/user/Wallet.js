@@ -23,7 +23,7 @@ const Wallet = () => {
   const [histories, setHistories] = useState([]);
   const [historyData, setHistoryData] = useState([]);
 
-  const quickAmounts = [100, 200, 500, 1000, 2000, 5000];
+  const quickAmounts = [1000, 3000, 5000, 10000, 25000, 50000];
 
   useEffect(() => {
     refreshBalance();

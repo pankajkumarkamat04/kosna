@@ -7,9 +7,7 @@ import DashboardLayout from "./components/DashboardLayout";
 import InstallMobileIcon from "@mui/icons-material/InstallMobile";
 import TollIcon from "@mui/icons-material/Toll";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import { useAuth } from "../context/AuthContext";
-import PaymentIcon from "@mui/icons-material/Payment";
 import "./Dashboard.css";
 
 const Dashboard = () => {
@@ -98,36 +96,7 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <div
-              className="shadow dash-card"
-              onClick={() => navigate("/payments")}
-            >
-              <div className="dash-card-content">
-                <div className="dash-card-info">
-                  <div className="dash-card-number">
-                    <b>--</b>
-                  </div>
-                  <span className="dash-card-label">Payments</span>
-                </div>
-                <div className="dash-card-icon">
-                  <PaymentIcon />
-                </div>
-              </div>
-            </div>
 
-            <div className="shadow dash-card" onClick={() => navigate("/query")}>
-              <div className="dash-card-content">
-                <div className="dash-card-info">
-                  <div className="dash-card-number">
-                    <b>--</b>
-                  </div>
-                  <span className="dash-card-label">Queries</span>
-                </div>
-                <div className="dash-card-icon">
-                  <QuestionAnswerIcon />
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </DashboardLayout>
