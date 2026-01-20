@@ -5,12 +5,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import website from "../website/data";
+import { GameCardSkeleton } from "./SkeletonLoader";
 import "./Products.css";
 
 const Products = ({ title, homeLabel }) => {
   const navigate = useNavigate();
   const [products, setProducts] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("All");
   const [search, setSearch] = useState(null);
 
@@ -45,26 +46,41 @@ const Products = ({ title, homeLabel }) => {
       </h2>
       <div className="hrline"></div>
       <div className="products">
-        {products &&
+        {loading
+          ? Array.from({ length: 8 }).map((_, index) => (
+            <GameCardSkeleton key={index} />
+          ))
+          : products &&
           products.map((product, index) => {
             return (
               <div
-                onClick={() => navigate(`/product/${product?._id || product?.id || ''}`)}
+                onClick={() =>
+                  navigate(`/product/${product?._id || product?.id || ""}`)
+                }
                 key={index}
                 className="product text-start"
               >
-                <div className={`productimage loading ${loading && "active"}`}>
-                  <img src={product?.image || `${website.link}/${product?.image}`} alt={product?.name} />
+                <div className="productimage">
+                  <img
+                    src={
+                      product?.image || `${website.link}/${product?.image}`
+                    }
+                    alt={product?.name}
+                  />
                 </div>
                 <div className="productdetails">
                   <div className="name">{product?.name}</div>
-                  <div className="company">{product?.publisher || product?.company}</div>
+                  <div className="company">
+                    {product?.publisher || product?.company}
+                  </div>
                   {product?.cost && product?.cost[0] && (
                     <div className="price">
                       <div className="fakeprice">
                         ₹{product?.cost[0]?.fakePrice}
                       </div>
-                      <div className="realprice">₹{product?.cost[0]?.price}</div>
+                      <div className="realprice">
+                        ₹{product?.cost[0]?.price}
+                      </div>
                       {product?.savetag && (
                         <div className="sale">
                           <LocalOfferIcon className="icon" />

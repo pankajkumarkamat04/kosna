@@ -66,9 +66,8 @@ const GamePage = () => {
                   className="product text-start"
                 >
                   <div
-                    className={`product-img-cont loading ${
-                      loading && "active"
-                    }`}
+                    className={`product-img-cont loading ${loading && "active"
+                      }`}
                   >
                     <img src={product?.image} alt={product?.name} />
                   </div>

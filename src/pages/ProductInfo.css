@@ -56,7 +56,7 @@
 
 .payment-method:hover {
   border-color: var(--a);
-  box-shadow: 0 6px 20px rgba(1, 255, 253, 0.3);
+  /* box-shadow: 0 6px 20px rgba(1, 255, 253, 0.3); */
   transform: translateY(-2px);
 }
 
@@ -68,7 +68,7 @@
 
 .payment-info img {
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); */
 }
 
 .payment-title {
@@ -112,23 +112,23 @@
 .wallet-btn {
   background: linear-gradient(135deg, var(--a), rgba(1, 255, 253, 0.8));
   color: #0a192f;
-  box-shadow: 0 4px 15px rgba(1, 255, 253, 0.3);
+  /* box-shadow: 0 4px 15px rgba(1, 255, 253, 0.3); */
 }
 
 .wallet-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(1, 255, 253, 0.5);
+  /* box-shadow: 0 6px 20px rgba(1, 255, 253, 0.5); */
 }
 
 .upi-btn {
   background: linear-gradient(135deg, #007bff, #0056b3);
   color: white;
-  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+  /* box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3); */
 }
 
 .upi-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.5);
+  /* box-shadow: 0 6px 20px rgba(0, 123, 255, 0.5); */
 }
 
 .payment-btn:disabled {
@@ -146,15 +146,13 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(1, 255, 253, 0.3);
+  /* box-shadow: 0 4px 15px rgba(1, 255, 253, 0.3); */
 }
 
 .login-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(1, 255, 253, 0.5);
+  /* box-shadow: 0 6px 20px rgba(1, 255, 253, 0.5); */
 }
-
-/* ... previous styles ... */
 
 .validate-btn {
   background: linear-gradient(135deg, var(--a), rgba(1, 255, 253, 0.8));
@@ -165,7 +163,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(1, 255, 253, 0.3);
+  /* box-shadow: 0 4px 15px rgba(1, 255, 253, 0.3); */
   width: 100%;
   display: flex;
   justify-content: center;
@@ -176,7 +174,7 @@
 
 .validate-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(1, 255, 253, 0.5);
+  /* box-shadow: 0 6px 20px rgba(1, 255, 253, 0.5); */
   opacity: 0.9;
 }
 
@@ -244,7 +242,7 @@
 .pcategory::-webkit-scrollbar-thumb {
   background: linear-gradient(90deg, var(--a), rgba(1, 255, 253, 0.8));
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(1, 255, 253, 0.3);
+  /* box-shadow: 0 0 10px rgba(1, 255, 253, 0.3); */
 }
 
 .pcategory::-webkit-scrollbar-thumb:hover {
@@ -252,12 +250,14 @@
 }
 
 .pcategory .pc {
-  min-height: 110px;
+  height: 125px;
+  /* Fixed height */
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  /* Center content */
   align-items: center;
   flex-direction: column;
-  padding: 15px 12px;
+  padding: 10px;
   color: #fff;
   border-radius: 12px;
   cursor: pointer;
@@ -291,21 +291,22 @@
   background: linear-gradient(135deg, rgba(1, 255, 253, 0.15), rgba(1, 255, 253, 0.08));
   border-color: var(--a);
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(1, 255, 253, 0.3);
+  /* box-shadow: 0 8px 20px rgba(1, 255, 253, 0.3); */
 }
 
 .pcategory .pc.active {
   background: linear-gradient(135deg, rgba(1, 255, 253, 0.2), rgba(1, 255, 253, 0.1));
   border-color: var(--a);
-  box-shadow: 0 6px 20px rgba(1, 255, 253, 0.4);
+  /* box-shadow: 0 6px 20px rgba(1, 255, 253, 0.4); */
 }
 
 .pcategory .pc img {
-  width: 55px;
-  height: 55px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
   filter: drop-shadow(0 0 8px rgba(1, 255, 253, 0.3));
   transition: transform 0.3s ease;
+  margin-bottom: 8px;
 }
 
 .pcategory .pc:hover img,
@@ -318,7 +319,11 @@
   font-weight: 600;
   margin: 0;
   color: var(--a) !important;
-  margin-top: 8px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 4px;
 }
 
 /* PACK CATEGORY ENDS  */

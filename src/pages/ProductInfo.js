@@ -14,6 +14,7 @@ import BoltIcon from "@mui/icons-material/Bolt";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
+import { ProductInfoSkeleton } from "../components/SkeletonLoader";
 import "./ProductInfo.css";
 import "./Circle.css";
 import "./ProductPage.css";
@@ -32,6 +33,7 @@ const ProductInfo = () => {
   const [showImage, setShowImage] = useState(0);
   const [error, setError] = useState(false);
   //!NEW STATE
+  const [pageLoading, setPageLoading] = useState(true);
   const [amount, setAmount] = useState(null);
   const [packId, setPackId] = useState(null);
   const [selectedPrice, setSelectedPrice] = useState(null);
@@ -83,11 +85,13 @@ const ProductInfo = () => {
 
   const getProduct = async () => {
     try {
+      setPageLoading(true);
       // Get game by ID from URL parameter
       const gameId = params._id;
 
       if (!gameId) {
         message.error("Game ID not provided");
+        setPageLoading(false);
         return;
       }
 
@@ -103,6 +107,7 @@ const ProductInfo = () => {
 
         if (!game) {
           message.error("Game not found");
+          setPageLoading(false);
           return;
         }
 
@@ -114,6 +119,7 @@ const ProductInfo = () => {
           if (!packsResponse.ok) {
             const errorData = await packsResponse.json().catch(() => ({}));
             message.error(errorData.message || "Failed to load diamond packs. Please try again.");
+            setPageLoading(false);
             return;
           }
 
@@ -181,6 +187,11 @@ const ProductInfo = () => {
     } catch (error) {
       console.log(error);
       message.error("Failed to load product");
+    } finally {
+      // Add a small delay to prevent flickering if loading is too fast
+      setTimeout(() => {
+        setPageLoading(false);
+      }, 500);
     }
   };
 
@@ -528,6 +539,14 @@ const ProductInfo = () => {
 
     return imageMap;
   }, [product?.cost]);
+
+  if (pageLoading) {
+    return (
+      <Layout>
+        <ProductInfoSkeleton />
+      </Layout>
+    );
+  }
 
   return (
     <Layout>

@@ -55,9 +55,9 @@ const Wallet = () => {
     }
 
     const amount = parseFloat(form.amount);
-    if (isNaN(amount) || amount <= 0) {
+    if (isNaN(amount) || amount < 1) {
       setError(true);
-      return message.error("Please enter a valid amount");
+      return message.error("Please enter a valid amount (minimum 1)");
     }
 
     try {
@@ -135,7 +135,7 @@ const Wallet = () => {
     const { name, value } = e.target;
     setForm({ ...form, [e.target.name]: e.target.value });
     if (name === "amount") {
-      if (value < 20) {
+      if (value < 1) {
         setError(true);
       } else {
         setError(false);
@@ -417,10 +417,16 @@ const Wallet = () => {
             <div className="txn-details">
               <div className="form-fields mb-2">
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
                   placeholder="Enter amount"
                   name="amount"
+                  min="1"
+                  onKeyDown={(e) => {
+                    if (e.key === "-" || e.key === "e") {
+                      e.preventDefault();
+                    }
+                  }}
                   onChange={handleChange}
                   value={form?.amount}
                 />

@@ -51,8 +51,8 @@ const Header = () => {
           </div>
           <div className="action-btns header-right">
             {user && (
-              <div 
-                onClick={() => navigate("/wallet")} 
+              <div
+                onClick={() => navigate("/wallet")}
                 className="wallet-cont header-coin-btn"
               >
                 <img width="20px" height="20px" src={IMAGES.coin} alt="" />
@@ -64,14 +64,14 @@ const Header = () => {
               theme="light"
               content={<LogoutTippy user={user && user} />}
             >
-              <span 
+              <span
                 className="menu-img-container d-flex header-user-icon"
                 onClick={() => navigate(user ? "/my-account" : "/login")}
                 style={{ cursor: "pointer" }}
               >
                 <AccountCircleIcon
                   className="icon d-lg-block d-md-none d-none"
-                  style={{ fontSize: "32px", color: "#25C19B" }}
+                  style={{ fontSize: "32px", color: "#ffffff" }}
                 />
               </span>
             </Tippy>
@@ -90,8 +90,8 @@ const Header = () => {
         </div>
         <div className="mobile-header-right">
           {user && (
-            <div 
-              onClick={() => navigate("/wallet")} 
+            <div
+              onClick={() => navigate("/wallet")}
               className="wallet-cont mobile-header-coin-btn"
             >
               <img width="18px" height="18px" src={IMAGES.coin} alt="" />
@@ -103,14 +103,14 @@ const Header = () => {
             theme="light"
             content={<LogoutTippy user={user && user} />}
           >
-            <span 
+            <span
               className="menu-img-container d-flex mobile-header-user-icon"
               onClick={() => navigate(user ? "/my-account" : "/login")}
               style={{ cursor: "pointer" }}
             >
               <AccountCircleIcon
                 className="icon"
-                style={{ fontSize: "28px", color: "#25C19B" }}
+                style={{ fontSize: "28px", color: "#ffffff" }}
               />
             </span>
           </Tippy>
