@@ -21,19 +21,19 @@ const LogoutTippy = ({ user }) => {
 
   const getUserData = async () => {
     const token = localStorage.getItem("authToken") || localStorage.getItem("token");
-    
+
     if (!token) {
       dispatch(setUser(null));
       return;
     }
-    
+
     try {
       const response = await authAPI.getUserInfo();
-      
+
       if (response.ok) {
         const res = await response.json();
         const user = res.data || res;
-        
+
         if (user && (user._id || user.name || user.email)) {
           dispatch(setUser(user));
         } else {
@@ -64,32 +64,51 @@ const LogoutTippy = ({ user }) => {
   }, []);
 
   return (
-    <div className="logout-tippy">
-      {user && user ? (
+    <div className="logout-tippy-container">
+      {user ? (
         <>
-          <div className="section-1">
-            <span>
-              <Person2Icon className="me-2 icon" />
-            </span>
-            <span onClick={() => navigate("/user-dashboard")}>
-              My Dashboard
-            </span>
+          <div className="user-profile-section">
+            <div className="user-avatar">
+              <Person2Icon />
+            </div>
+            <div className="user-info">
+              <span className="user-name">{user.name || "User"}</span>
+              <span className="user-email">{user.email || ""}</span>
+            </div>
           </div>
-          <div className="section-2">
-            <span>
-              <LogoutIcon className="me-2 icon" />
-            </span>
-            <span onClick={handleLogout}>Logout</span>
+
+          <div className="menu-divider"></div>
+
+          <div className="menu-item" onClick={() => navigate("/user-dashboard")}>
+            <div className="menu-icon">
+              <Person2Icon />
+            </div>
+            <span>My Dashboard</span>
+          </div>
+
+          <div className="menu-item logout" onClick={handleLogout}>
+            <div className="menu-icon">
+              <LogoutIcon />
+            </div>
+            <span>Logout</span>
           </div>
         </>
       ) : (
         <>
-          <div className="section-1">
-            <span onClick={() => navigate("/login")}>Login</span>
+          <div className="menu-item" onClick={() => navigate("/login")}>
+            <div className="menu-icon">
+              <Person2Icon />
+            </div>
+            <span>Login</span>
           </div>
-          <hr />
-          <div className="section-1">
-            <span onClick={() => navigate("/register")}>Register</span>
+
+          <div className="menu-divider"></div>
+
+          <div className="menu-item" onClick={() => navigate("/register")}>
+            <div className="menu-icon">
+              <Person2Icon />
+            </div>
+            <span>Register</span>
           </div>
         </>
       )}

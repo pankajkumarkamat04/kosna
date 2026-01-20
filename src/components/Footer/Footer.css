@@ -101,18 +101,14 @@
 }
 
 .payment-logo {
-  background: rgba(1, 255, 253, 0.05);
-  border: 1px solid rgba(1, 255, 253, 0.2);
-  border-radius: 8px;
-  padding: 10px;
+  /* Removed box styling */
+  padding: 0;
   transition: all 0.3s ease;
 }
 
 .payment-logo:hover {
-  background: rgba(1, 255, 253, 0.1);
-  border-color: var(--a);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(1, 255, 253, 0.2);
+  filter: drop-shadow(0 4px 6px rgba(1, 255, 253, 0.3));
 }
 
 .payment-logo img {
@@ -238,12 +234,29 @@
   }
 
   .footer-main-content {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "brand brand"
+      "payment payment"
+      "legal quick";
     gap: 30px;
   }
 
   .footer-brand-section {
+    grid-area: brand;
     text-align: center;
+  }
+
+  .payment-section {
+    grid-area: payment;
+  }
+
+  .legal-section {
+    grid-area: legal;
+  }
+
+  .quick-links-section {
+    grid-area: quick;
   }
 
   .footer-section-title {

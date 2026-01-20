@@ -6,10 +6,9 @@ import DashboardLayout from "./components/DashboardLayout";
 import Layout from "../components/Layout/Layout";
 import { walletAPI, transactionAPI } from "../lib/api";
 import { useAuth } from "../context/AuthContext";
-import TollIcon from "@mui/icons-material/Toll";
 import HistoryIcon from "@mui/icons-material/History";
+import AddCardIcon from "@mui/icons-material/AddCard";
 import IMAGES from "../img/image.js";
-import website from "../website/data.js";
 import "./Wallet.css";
 
 const Wallet = () => {
@@ -17,38 +16,20 @@ const Wallet = () => {
   const { user } = useSelector((state) => state.user);
   const { balance, refreshBalance } = useAuth();
   const [tab, setTab] = useState(location.state?.tab ?? 1);
-  const [btn, setBtn] = useState(0);
   const [form, setForm] = useState({ email: "", amount: "" });
-  const [payments, setPayments] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [orderId, setOrderId] = useState(null);
   const [selectedDate, setSelectedDate] = useState("");
   const [histories, setHistories] = useState([]);
   const [historyData, setHistoryData] = useState([]);
 
-  const generateOrderId = () => {
-    const numbers = "01234567"; // 8 numbers
-    const randomNumbers = Array.from({ length: 7 }, () =>
-      numbers.charAt(Math.floor(Math.random() * numbers.length))
-    );
-    const now = new Date();
-    const day = String(now.getDate()).padStart(2, "0");
-    const month = String(now.getMonth() + 1).padStart(2, "0"); // getMonth() is 0-indexed
-    const year = String(now.getFullYear()).slice(2); // last two digits of the year
-    const seconds = String(now.getSeconds()).padStart(2, "0");
-    const orderId = `${year}${month}${day}${seconds}${randomNumbers.join("")}`;
-    setOrderId(orderId);
-  };
+  const quickAmounts = [100, 200, 500, 1000, 2000, 5000];
 
   useEffect(() => {
-    generateOrderId();
-    // Refresh balance on component mount
     refreshBalance();
   }, [refreshBalance]);
 
   async function submitPayment() {
-    // Validate amount
     if (!form?.amount || form.amount.trim() === "") {
       setError(true);
       return message.error("Please enter an amount");
@@ -63,14 +44,11 @@ const Wallet = () => {
     try {
       setLoading(true);
       setError(false);
-      // Use walletAPI.addCoins for adding coins
       const redirectUrl = `${window.location.origin}/payment-status`;
-      console.log("Submitting payment with amount:", amount, "redirectUrl:", redirectUrl);
       const response = await walletAPI.addCoins(amount, redirectUrl);
       const res = await response.json();
-      console.log("Payment response:", res);
+
       if (res.success) {
-        // If API returns payment URL, redirect to it
         const paymentUrl = res.data?.payment_url || res.data?.paymentUrl || res.transaction?.paymentUrl;
         if (paymentUrl) {
           message.success(res.message || "Redirecting to payment gateway...");
@@ -80,23 +58,21 @@ const Wallet = () => {
         } else {
           message.success(res.message || "Coins added successfully");
           refreshBalance();
-          setForm({ email: "", amount: "" }); // Reset form
+          setForm({ email: "", amount: "" });
         }
-        setLoading(false);
       } else {
         message.error(res.message || "Failed to add coins");
-        setLoading(false);
       }
     } catch (error) {
       console.error("Error initiating payment:", error);
       message.error("Failed to add coins");
+    } finally {
       setLoading(false);
     }
   }
 
   useEffect(() => {
     if (!selectedDate) {
-      // If no date selected, show all transactions
       setHistories(historyData);
       return;
     }
@@ -114,11 +90,9 @@ const Wallet = () => {
 
   async function getHistories() {
     try {
-      // Use transactionAPI to get wallet history
       const response = await transactionAPI.getTransactionHistory({});
       const res = await response.json();
       if (res.success) {
-        // API returns transactions in res.transactions, not res.data
         const transactions = res.transactions || res.data || [];
         // Sort by date descending (newest first)
         const sortedTransactions = transactions.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -135,7 +109,7 @@ const Wallet = () => {
 
   function handleChange(e) {
     const { name, value } = e.target;
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm({ ...form, [name]: value });
     if (name === "amount") {
       if (value < 1) {
         setError(true);
@@ -144,6 +118,11 @@ const Wallet = () => {
       }
     }
   }
+
+  const handleQuickAmount = (amount) => {
+    setForm({ ...form, amount: amount.toString() });
+    setError(false);
+  };
 
   useEffect(() => {
     if (user?.email) {
@@ -154,7 +133,6 @@ const Wallet = () => {
         customer_mobile: user?.mobile,
       }));
       getHistories();
-      // Refresh balance when wallet component mounts or user changes
       refreshBalance();
     }
   }, [user, refreshBalance]);
@@ -162,283 +140,191 @@ const Wallet = () => {
   return (
     <Layout>
       <DashboardLayout>
-        <div className="wallet-dash">
-          <div className="bal w-100">
-            <img width="25px" src={IMAGES.ycoin} className="me-2" alt="" />
-            Coins: {parseFloat(balance).toFixed(2)}
+        <div className="wallet-page-container">
+          {/* Balance Card */}
+          <div className="wallet-balance-card">
+            <div className="balance-label">Total Balance</div>
+            <div className="balance-amount">
+              <img src={IMAGES.ycoin} alt="coin" />
+              <span>{parseFloat(balance).toFixed(2)}</span>
+            </div>
           </div>
-          <div className="wallet-dash-tabs">
+
+          {/* Tabs */}
+          <div className="wallet-tabs">
             <div
-              className={`wallet-dash-card ${tab === 1 && "active"}`}
+              className={`wallet-tab-item ${tab === 1 ? 'active' : ''}`}
               onClick={() => setTab(1)}
             >
-              Add Coins
-              <img width="25px" src={IMAGES.ycoin} alt="" />
+              <AddCardIcon /> Add Coins
             </div>
             <div
-              className={`wallet-dash-card ${tab === 0 && "active"}`}
+              className={`wallet-tab-item ${tab === 0 ? 'active' : ''}`}
               onClick={() => setTab(0)}
             >
-              Transaction History
-              <HistoryIcon className="icon ms-2" />
+              <HistoryIcon /> Transactions
             </div>
           </div>
-        </div>
 
-        {/* TXN HISTORY */}
-        {/* TXN HISTORY */}
-        {/* TXN HISTORY */}
-        {tab === 0 && (
-          <>
-            <div className="tools mb-4 d-flex align-items-center gap-3" style={{ padding: "0 10px" }}>
-              <div className="form-fields" style={{ flex: "1" }}>
-                <DatePicker
-                  className="w-100 custom-datepicker"
-                  placeholder="Select Date"
-                  onChange={(date, dateString) => setSelectedDate(dateString)}
-                  format="YYYY-MM-DD"
-                  popupClassName="premium-date-picker-dropdown"
-                />
-              </div>
-
-              <div className="form-fields" style={{ flex: "0 0 auto", width: "auto" }}>
-                <button
-                  className="btn btn-danger"
-                  style={{ height: "45px", display: "flex", alignItems: "center" }}
-                  onClick={() => {
-                    setSelectedDate("");
-                    setHistories(historyData);
-                  }}
-                >
-                  Clear Filter
-                </button>
-              </div>
-            </div>
-
-            {/* DESKTOP */}
-            {/* DESKTOP */}
-            {/* DESKTOP */}
-            <div className="d-none d-md-none d-lg-block p-3">
-              <table className="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>
-                      <small>Sr No</small>
-                    </th>
-                    <th>
-                      <small>Order ID</small>
-                    </th>
-                    <th>
-                      <small>Price</small>
-                    </th>
-                    <th>
-                      <small>Balance Before</small>
-                    </th>
-                    <th>
-                      <small>Balance After</small>
-                    </th>
-                    <th>
-                      <small>Product Info</small>
-                    </th>
-                    <th>
-                      <small>Status</small>
-                    </th>
-                    <th>
-                      <small>Date</small>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {histories && histories?.length === 0 ? (
-                    <tr>
-                      <td align="center" colSpan={9}>
-                        No record found
-                      </td>
-                    </tr>
-                  ) : (
-                    histories?.map((item, index) => {
-                      const transactionType = item.udf2 || item.type || "N/A";
-                      const productInfo = item.paymentNote || item.product || "N/A";
-                      const statusClass = item.status === "pending" ? "text-warning" :
-                        item.status === "success" || item.status === "completed" ? "text-success" :
-                          item.status === "failed" ? "text-danger" : "text-dark";
-
-                      return (
-                        <tr key={item._id || index}>
-                          <td>
-                            <small>{index + 1}</small>
-                          </td>
-                          <td>
-                            <small>{item.orderId}</small>
-                          </td>
-                          <td>
-                            <small>₹{parseFloat(item.amount || 0).toFixed(2)}</small>
-                          </td>
-                          <td>
-                            <small>{item.balanceBefore ? `₹${item.balanceBefore}` : "N/A"}</small>
-                          </td>
-                          <td>
-                            <small>{item.balanceAfter ? `₹${item.balanceAfter}` : "N/A"}</small>
-                          </td>
-                          <td>
-                            <small>{productInfo}</small>
-                          </td>
-                          <td>
-                            <small className={statusClass}>{item.status || transactionType}</small>
-                          </td>
-                          <td>
-                            <small>
-                              {new Date(item?.createdAt).toLocaleString(
-                                "default",
-                                {
-                                  day: "numeric",
-                                  month: "long",
-                                  year: "numeric",
-                                  hour: "numeric",
-                                  minute: "numeric",
-                                  second: "numeric",
-                                }
-                              )}
-                            </small>
-                          </td>
-                        </tr>
-                      );
-                    })
-                  )}
-                </tbody>
-              </table>
-            </div>
-
-            {/* MOBILE */}
-            {/* MOBILE */}
-            {/* MOBILE */}
-            <div className="d-block d-lg-none wallet-history-mobile p-3">
-              {histories && histories?.length === 0 ? (
-                <div className="whistory m-0">No record found</div>
-              ) : (
-                histories?.map((item, index) => {
-                  const transactionType = item.udf2 || item.type || "N/A";
-                  const productInfo = item.paymentNote || item.product || "N/A";
-                  const statusClass = item.status === "pending" ? "text-warning" :
-                    item.status === "success" || item.status === "completed" ? "text-success" :
-                      item.status === "failed" ? "text-danger" : "text-dark";
-
-                  return (
-                    <div className="whistory" key={item._id || index}>
-                      <div className="items">
-                        <span className="fw-bold">Transaction Details</span>
-                        <span className="fw-bold text-success">
-                          {new Date(
-                            item?.createdAt || item?.created
-                          ).toLocaleString("default", {
-                            day: "numeric",
-                            month: "long",
-                            year: "numeric",
-                            hour: "numeric",
-                            minute: "numeric",
-                            second: "numeric",
-                          })}
-                        </span>
-                      </div>
-                      <div className="items">
-                        <div className="item-name">
-                          <span>Order Id</span>
-                        </div>
-                        <div className="item-details text-primary">
-                          <span>{item?.orderId}</span>
-                        </div>
-                      </div>
-
-                      <div className="items">
-                        <div className="item-name">
-                          <span>Product Info</span>
-                        </div>
-                        <div className="item-details">
-                          <span>{productInfo}</span>
-                        </div>
-                      </div>
-
-                      {item?.orderInfo && (
-                        <div className="items">
-                          <div className="item-name">
-                            <span>Order Info</span>
-                          </div>
-                          <div className="item-details">
-                            <span>{item?.orderInfo}</span>
-                          </div>
-                        </div>
-                      )}
-
-                      <div className="items">
-                        <div className="item-name">
-                          <span>Amount</span>
-                        </div>
-                        <div className="item-details">
-                          <span>₹{parseFloat(item?.amount || 0).toFixed(2)}</span>
-                        </div>
-                      </div>
-                      {item?.balanceBefore && (
-                        <div className="items">
-                          <div className="item-name">
-                            <span>Balance Before</span>
-                          </div>
-                          <div className="item-details">
-                            <span>₹{item.balanceBefore}</span>
-                          </div>
-                        </div>
-                      )}
-                      {item?.balanceAfter && (
-                        <div className="items">
-                          <div className="item-name">
-                            <span>Balance After</span>
-                          </div>
-                          <div className="item-details">
-                            <span>₹{item.balanceAfter}</span>
-                          </div>
-                        </div>
-                      )}
-                      <div className="items">
-                        <div className="item-name">
-                          <span>Status</span>
-                        </div>
-                        <div className={`item-details ${statusClass}`}>
-                          <span>{item?.status || transactionType}</span>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })
-              )}
-            </div>
-          </>
-        )}
-
-        {/* BARCODE  */}
-        {tab === 1 && (
-          <div className="add-money">
-            <div className="txn-details">
-              <div className="form-fields mb-2">
+          {/* Add Coins Section */}
+          {tab === 1 && (
+            <div className="add-coins-section">
+              <div className="amount-input-group">
+                <label>Enter Amount</label>
                 <input
                   type="number"
-                  className="form-control"
-                  placeholder="Enter amount"
+                  className="custom-amount-input"
+                  placeholder="₹0"
                   name="amount"
                   min="1"
+                  value={form.amount}
+                  onChange={handleChange}
                   onKeyDown={(e) => {
                     if (e.key === "-" || e.key === "e") {
                       e.preventDefault();
                     }
                   }}
-                  onChange={handleChange}
-                  value={form?.amount}
                 />
               </div>
-              <button onClick={submitPayment} className="w-100 theme-btn mt-2">
-                Pay Online
+
+              <div className="quick-amounts">
+                {quickAmounts.map((amt) => (
+                  <div
+                    key={amt}
+                    className="quick-amount-btn"
+                    onClick={() => handleQuickAmount(amt)}
+                  >
+                    <small>Add</small>
+                    <span>₹{amt}</span>
+                  </div>
+                ))}
+              </div>
+
+              <button
+                className="pay-btn"
+                onClick={submitPayment}
+                disabled={loading}
+              >
+                {loading ? 'Processing...' : 'Proceed to Pay'}
               </button>
             </div>
-          </div>
-        )}
+          )}
+
+          {/* Transaction History Section */}
+          {tab === 0 && (
+            <div className="history-section">
+              <div className="history-filters">
+                <div style={{ flex: 1 }}>
+                  <DatePicker
+                    className="w-100 custom-datepicker"
+                    placeholder="Filter by Date"
+                    onChange={(date, dateString) => setSelectedDate(dateString)}
+                    format="YYYY-MM-DD"
+                    popupClassName="premium-date-picker-dropdown"
+                  />
+                </div>
+                <button
+                  className="clear-btn"
+                  onClick={() => {
+                    setSelectedDate("");
+                    setHistories(historyData);
+                  }}
+                >
+                  Clear
+                </button>
+              </div>
+
+              {/* Desktop Table */}
+              <div className="d-none d-lg-block custom-table-responsive">
+                <table className="custom-table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Order ID</th>
+                      <th>Product</th>
+                      <th>Amount</th>
+                      <th>Balance</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {histories && histories.length > 0 ? (
+                      histories.map((item, index) => (
+                        <tr key={item._id || index}>
+                          <td>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                              <span style={{ fontWeight: 'bold', color: '#fff' }}>
+                                {new Date(item.createdAt).toLocaleDateString(undefined, { day: 'numeric', month: 'short' })}
+                              </span>
+                              <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>
+                                {new Date(item.createdAt).toLocaleTimeString()}
+                              </span>
+                            </div>
+                          </td>
+                          <td style={{ color: 'var(--a)' }}>{item.orderId}</td>
+                          <td>{item.paymentNote || item.product || "Wallet Topup"}</td>
+                          <td style={{ fontWeight: 'bold', fontSize: '16px' }}>₹{parseFloat(item.amount || 0).toFixed(2)}</td>
+                          <td style={{ color: 'rgba(255,255,255,0.7)' }}>
+                            {item.balanceAfter ? `₹${parseFloat(item.balanceAfter).toFixed(2)}` : "-"}
+                          </td>
+                          <td>
+                            <span className={`status-badge ${item.status || (item.udf2 || "success").toLowerCase()}`}>
+                              {item.status || item.udf2 || "Success"}
+                            </span>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="6" style={{ textAlign: "center", padding: "40px" }}>No transactions found</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Mobile List */}
+              <div className="d-block d-lg-none p-3 mobile-history-list">
+                {histories && histories.length > 0 ? (
+                  histories.map((item, index) => (
+                    <div className="transaction-card" key={item._id || index}>
+                      <div className="t-header">
+                        <span className="t-date">
+                          {new Date(item.createdAt).toLocaleString()}
+                        </span>
+                        <span className={`status-badge ${item.status || (item.udf2 || "success").toLowerCase()}`}>
+                          {item.status || item.udf2 || "Success"}
+                        </span>
+                      </div>
+                      <div className="t-row" style={{ alignItems: 'center' }}>
+                        <span className="t-amount" style={{ fontSize: '20px', color: 'var(--a)' }}>
+                          ₹{parseFloat(item.amount || 0).toFixed(2)}
+                        </span>
+                        <span className="t-value" style={{ fontSize: '12px', opacity: 0.8 }}>
+                          Order ID: {item.orderId}
+                        </span>
+                      </div>
+                      <div className="t-row">
+                        <span className="t-label">Product</span>
+                        <span className="t-value">{item.paymentNote || item.product || "Wallet Topup"}</span>
+                      </div>
+                      {item.balanceAfter && (
+                        <div className="t-row">
+                          <span className="t-label">Balance</span>
+                          <span className="t-value">₹{parseFloat(item.balanceAfter).toFixed(2)}</span>
+                        </div>
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <div style={{ textAlign: "center", padding: "20px", color: "rgba(255,255,255,0.5)" }}>
+                    No transactions found
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
       </DashboardLayout>
     </Layout>
   );

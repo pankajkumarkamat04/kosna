@@ -61,3 +61,45 @@ export const HomeBannerSkeleton = () => {
         </div>
     );
 };
+
+export const AccountSkeleton = () => {
+    return (
+        <div className="user-accout-details">
+            {/* Logout button skeleton */}
+            <div className="d-flex justify-content-end mb-4">
+                <div className="skeleton" style={{ width: '100px', height: '40px', borderRadius: '8px' }}></div>
+            </div>
+
+            <div className="row">
+                <div className="col-12 col-sm-12 col-md-8 col-lg-6">
+                    {/* Name Field Skeleton */}
+                    <div className="form-fields mb-3">
+                        <div className="skeleton mb-2" style={{ width: '60px', height: '20px' }}></div>
+                        <div className="skeleton" style={{ width: '100%', height: '50px', borderRadius: '8px' }}></div>
+                    </div>
+
+                    {/* Email Field Skeleton */}
+                    <div className="form-fields mb-3">
+                        <div className="skeleton mb-2" style={{ width: '60px', height: '20px' }}></div>
+                        <div className="skeleton" style={{ width: '100%', height: '50px', borderRadius: '8px' }}></div>
+                    </div>
+
+                    {/* Phone Field Skeleton */}
+                    <div className="form-fields mb-3">
+                        <div className="skeleton mb-2" style={{ width: '60px', height: '20px' }}></div>
+                        <div className="skeleton" style={{ width: '100%', height: '50px', borderRadius: '8px' }}></div>
+                    </div>
+
+                    {/* Password Field Skeleton */}
+                    <div className="form-fields mb-3">
+                        <div className="skeleton mb-2" style={{ width: '180px', height: '20px' }}></div>
+                        <div className="skeleton" style={{ width: '100%', height: '50px', borderRadius: '8px' }}></div>
+                    </div>
+
+                    {/* Button Skeleton */}
+                    <div className="skeleton mt-4" style={{ width: '100%', height: '50px', borderRadius: '12px' }}></div>
+                </div>
+            </div>
+        </div>
+    );
+};

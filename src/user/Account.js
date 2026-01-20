@@ -8,6 +8,7 @@ import DashboardLayout from "./components/DashboardLayout";
 import { authAPI, otherAPI } from "../lib/api";
 import { useAuth } from "../context/AuthContext";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { AccountSkeleton } from "../components/SkeletonLoader";
 import "./Account.css";
 
 const Account = () => {
@@ -111,11 +112,7 @@ const Account = () => {
     return (
       <Layout>
         <DashboardLayout>
-          <div className="user-accout-details" style={{ minHeight: "300px", display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <div className="spinner-border text-primary" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-          </div>
+          <AccountSkeleton />
         </DashboardLayout>
       </Layout>
     );

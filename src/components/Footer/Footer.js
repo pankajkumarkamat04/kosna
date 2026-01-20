@@ -40,7 +40,7 @@ const Footer = () => {
           </div>
 
           {/* Payment Methods Section */}
-          <div className="footer-section">
+          <div className="footer-section payment-section">
             <h6 className="footer-section-title">Payment Methods</h6>
             <div className="footer-divider"></div>
             <div className="payment-methods">
@@ -58,7 +58,7 @@ const Footer = () => {
           </div>
 
           {/* Quick Links Section */}
-          <div className="footer-section">
+          <div className="footer-section quick-links-section">
             <h6 className="footer-section-title">Quick Links</h6>
             <div className="footer-divider"></div>
             <div className="quick-links-grid">
@@ -69,7 +69,7 @@ const Footer = () => {
                 className="quick-link-item"
               >
                 <TelegramIcon className="quick-link-icon" />
-                <span>Telegram Channel</span>
+                <span>Telegram</span>
               </a>
               <a
                 href="https://facebook.com/yourpage"
@@ -78,7 +78,7 @@ const Footer = () => {
                 className="quick-link-item"
               >
                 <FacebookIcon className="quick-link-icon" />
-                <span>Facebook Page</span>
+                <span>Facebook</span>
               </a>
               <a
                 href="https://t.me/pankajkamat"
@@ -87,13 +87,13 @@ const Footer = () => {
                 className="quick-link-item"
               >
                 <SupportAgentIcon className="quick-link-icon" />
-                <span>Contact Support</span>
+                <span>Support</span>
               </a>
             </div>
           </div>
 
           {/* Legal Links */}
-          <div className="footer-section">
+          <div className="footer-section legal-section">
             <h6 className="footer-section-title">Legal</h6>
             <div className="footer-divider"></div>
             <ul className="legal-links">

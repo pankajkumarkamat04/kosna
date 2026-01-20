@@ -211,7 +211,7 @@ const Orders = () => {
           {/* MOBILE */}
           {/* MOBILE */}
           {/* MOBILE */}
-          <div className="d-block d-lg-none wallet-history-mobile p-3">
+          <div className="d-block d-lg-none wallet-history-mobile">
             {orders && orders?.length === 0 ? (
               <div className="whistory m-0">No order found</div>
             ) : (
