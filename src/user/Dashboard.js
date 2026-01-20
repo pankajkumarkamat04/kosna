@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
-import { orderAPI } from "../lib/api";
+import { dashboardAPI } from "../lib/api";
 import DashboardLayout from "./components/DashboardLayout";
 import InstallMobileIcon from "@mui/icons-material/InstallMobile";
 import TollIcon from "@mui/icons-material/Toll";
@@ -14,28 +14,33 @@ const Dashboard = () => {
   const { user } = useSelector((state) => state.user);
   const { balance } = useAuth();
   const navigate = useNavigate();
-  const [allOrders, setAllOrders] = useState(null);
+  const [stats, setStats] = useState({
+    walletBalance: 0,
+    orders: { total: 0, completedCount: 0, successAmount: 0 },
+    transactions: { total: 0, successfulCount: 0, successAmount: 0 }
+  });
   const [loading, setLoading] = useState(false);
 
-  const getAllUserOrders = async () => {
+  const getDashboardData = async () => {
     try {
       setLoading(true);
-      const response = await orderAPI.getOrderHistory({});
+      const response = await dashboardAPI.getDashboard();
       const res = await response.json();
-      if (res.success) {
-        setAllOrders(res.data);
+      if (res.success || res.message === "Dashboard data retrieved successfully") {
+        setStats(res.data || {});
         setLoading(false);
       } else {
         setLoading(false);
       }
     } catch (error) {
       setLoading(false);
+      console.error(error);
     }
   };
 
   useEffect(() => {
     if (user !== null) {
-      getAllUserOrders();
+      getDashboardData();
     }
   }, [user]);
 
@@ -54,7 +59,7 @@ const Dashboard = () => {
                     {loading ? (
                       <div className="loading-spinner"></div>
                     ) : (
-                      <b>{allOrders?.length || 0}</b>
+                      <b>{stats.orders?.total || 0}</b>
                     )}
                   </div>
                   <span className="dash-card-label">Total Orders</span>
@@ -69,9 +74,28 @@ const Dashboard = () => {
               <div className="dash-card-content">
                 <div className="dash-card-info">
                   <div className="dash-card-number">
-                    <b>₹{parseFloat(balance || 0).toFixed(2)}</b>
+                    {/* Prefer API balance, fallback to context balance */}
+                    <b>₹{parseFloat(stats.walletBalance ?? balance ?? 0).toFixed(2)}</b>
                   </div>
-                  <span className="dash-card-label">EZ Coins</span>
+                  <span className="dash-card-label">Coins</span>
+                </div>
+                <div className="dash-card-icon">
+                  <TollIcon />
+                </div>
+              </div>
+            </div>
+
+            <div className="shadow dash-card" onClick={() => navigate("/transactions")}>
+              <div className="dash-card-content">
+                <div className="dash-card-info">
+                  <div className="dash-card-number">
+                    {loading ? (
+                      <div className="loading-spinner"></div>
+                    ) : (
+                      <b>{stats.transactions?.total || 0}</b>
+                    )}
+                  </div>
+                  <span className="dash-card-label">Total Transactions</span>
                 </div>
                 <div className="dash-card-icon">
                   <TollIcon />

@@ -40,7 +40,7 @@ const Footer = () => {
           </div>
 
           {/* Payment Methods Section */}
-          <div className="footer-section payment-section">
+          <div className="footer-section payment-section d-block d-lg-none">
             <h6 className="footer-section-title">Payment Methods</h6>
             <div className="footer-divider"></div>
             <div className="payment-methods">

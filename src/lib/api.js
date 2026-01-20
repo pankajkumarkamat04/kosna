@@ -156,16 +156,31 @@ export const transactionAPI = {
 
 // Wallet APIs
 export const walletAPI = {
-  getDashboard: async () => {
-    return apiCall('/user/dashboard', {
-      method: 'GET',
-    });
-  },
-
   addCoins: async (amount, redirectUrl) => {
     return apiCall('/wallet/add', {
       method: 'POST',
       body: JSON.stringify({ amount, redirectUrl }),
+    });
+  },
+
+  getLedger: async (params = {}) => {
+    const queryParams = new URLSearchParams();
+    if (params.page) queryParams.append('page', params.page.toString());
+    if (params.limit) queryParams.append('limit', params.limit.toString());
+    if (params.startDate) queryParams.append('startDate', params.startDate);
+    if (params.endDate) queryParams.append('endDate', params.endDate);
+
+    return apiCall(`/wallet/ledger?${queryParams.toString()}`, {
+      method: 'GET',
+    });
+  },
+};
+
+// Dashboard APIs
+export const dashboardAPI = {
+  getDashboard: async () => {
+    return apiCall('/user/dashboard', {
+      method: 'GET',
     });
   },
 };

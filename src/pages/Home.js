@@ -12,7 +12,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import TelegramIcon from "@mui/icons-material/Telegram";
+import NewspaperIcon from "@mui/icons-material/Newspaper";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { message } from "antd";
 import "./Home.css";
@@ -138,13 +138,13 @@ const Home = () => {
             <ShoppingBagIcon className="action-icon" />
             <span>Orders</span>
           </div>
-          <div className="action-button" onClick={() => navigate("/wallet", { state: { tab: 0 } })}>
+          <div className="action-button" onClick={() => navigate("/transactions")}>
             <ReceiptIcon className="action-icon" />
             <span>Transactions</span>
           </div>
-          <div className="action-button" onClick={() => window.open("https://t.me/pankajkamat", "_blank")}>
-            <TelegramIcon className="action-icon" />
-            <span>Telegram</span>
+          <div className="action-button" onClick={() => navigate("/news")}>
+            <NewspaperIcon className="action-icon" />
+            <span>News</span>
           </div>
         </div>
 

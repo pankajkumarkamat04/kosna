@@ -52,7 +52,7 @@
 }
 
 .productpage .section {
-  width: 49%;
+  width: 100%;
   color: #fff !important;
   background: linear-gradient(135deg, rgba(1, 255, 253, 0.05), rgba(1, 255, 253, 0.02));
   padding: 30px;

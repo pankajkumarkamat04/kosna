@@ -35,7 +35,7 @@ const SideMenu = ({ sideMenu, setSideMenu }) => {
   };
   return (
     <div
-      className={`sidemenu-container d-block d-md-block d-lg-none ${sideMenu ? "active" : ""
+      className={`sidemenu-container d-block d-md-block ${sideMenu ? "active" : ""
         }`}
     >
       <div className="sidemenu">

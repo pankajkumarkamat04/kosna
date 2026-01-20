@@ -137,7 +137,7 @@ const Account = () => {
 
           <form onSubmit={handleUpdate}>
             <div className="row">
-              <div className="col-12 col-sm-12 col-md-8 col-lg-6">
+              <div className="col-12">
                 <div className="form-fields mb-3">
                   <label htmlFor="name" className="form-label">
                     Name

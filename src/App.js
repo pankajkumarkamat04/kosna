@@ -31,6 +31,8 @@ import Orders from "./user/Orders";
 import Address from "./user/Address";
 import Account from "./user/Account";
 import ViewOrder from "./user/ViewOrder";
+import News from "./pages/News";
+import Transactions from "./user/Transactions";
 import Wallet from "./user/Wallet";
 import Query from "./user/Query";
 import Maintenance from "./user/Maintenance";
@@ -67,127 +69,139 @@ function App() {
           <Loader />
         ) : website ? (
           <Routes>
-          {/* pages */}
-          <Route path="/:token?" element={<Home />} />
-          <Route
-            path="/register"
-            element={
-              <PublicRoute>
-                <Register />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <PublicRoute>
-                <Login />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="/otp"
-            element={
-              <PublicRoute>
-                <OTP />
-              </PublicRoute>
-            }
-          />
-          <Route path="/forgot-password" element={<ForgotPass />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-          {/* <Route path="/games" element={<GamePage />} /> */}
-          <Route path="/search" element={<Search />} />
-          <Route path="/product/:_id?" element={<ProductInfo />} />
-          <Route
-            path="/product-checkout"
-            element={
-              <ProtectedRoute>
-                <ProductCheckout />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/order-status"
-            element={
-              <ProtectedRoute>
-                <OrderStatus />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/promo" element={<PromoEvents />} />
-          <Route path="/promo/:id?" element={<SinglePromoEvent />} />
-          <Route path="/payment-status" element={<PaymentStatus />} />
-          <Route path="/walletsuccess/:name?" element={<Success />} />
-          <Route path="/success/:name?" element={<Success />} />
-          <Route path="/failure/:name?" element={<Failure />} />
-          <Route
-            path="/orders"
-            element={
-              <ProtectedRoute>
-                <Orders />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/wallet"
-            element={
-              <ProtectedRoute>
-                <Wallet />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/query"
-            element={
-              <ProtectedRoute>
-                <Query />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/address"
-            element={
-              <ProtectedRoute>
-                <Address />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/my-account"
-            element={
-              <ProtectedRoute>
-                <Account />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/view-order/:orderId?"
-            element={
-              <ProtectedRoute>
-                <ViewOrder />
-              </ProtectedRoute>
-            }
-          />
-          {/* <Route path="/service" element={<Service />} /> */}
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/refund-policy" element={<RefundPolicy />} />
-          {/* ======================== USER PAGES =============================== */}
-          {/* ========== EMAIL VERIFY */}
-          <Route
-            path="/user-dashboard/:token?"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-          {/* ======================== USER PAGES =============================== */}
-        </Routes>
-      ) : (
-        <Routes>
-          <Route path="/" element={<Maintenance />} />
-          <Route path="*" element={<Maintenance />} />
+            {/* pages */}
+            <Route path="/:token?" element={<Home />} />
+            <Route
+              path="/register"
+              element={
+                <PublicRoute>
+                  <Register />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <PublicRoute>
+                  <Login />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/otp"
+              element={
+                <PublicRoute>
+                  <OTP />
+                </PublicRoute>
+              }
+            />
+            <Route path="/forgot-password" element={<ForgotPass />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            {/* <Route path="/games" element={<GamePage />} /> */}
+            <Route path="/search" element={<Search />} />
+            <Route path="/product/:_id?" element={<ProductInfo />} />
+            <Route
+              path="/product-checkout"
+              element={
+                <ProtectedRoute>
+                  <ProductCheckout />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/order-status"
+              element={
+                <ProtectedRoute>
+                  <OrderStatus />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/promo" element={<PromoEvents />} />
+            <Route path="/promo/:id?" element={<SinglePromoEvent />} />
+            <Route path="/payment-status" element={<PaymentStatus />} />
+            <Route path="/walletsuccess/:name?" element={<Success />} />
+            <Route path="/success/:name?" element={<Success />} />
+            <Route path="/failure/:name?" element={<Failure />} />
+            <Route
+              path="/orders"
+              element={
+                <ProtectedRoute>
+                  <Orders />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/wallet"
+              element={
+                <ProtectedRoute>
+                  <Wallet />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/query"
+              element={
+                <ProtectedRoute>
+                  <Query />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/address"
+              element={
+                <ProtectedRoute>
+                  <Address />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/my-account"
+              element={
+                <ProtectedRoute>
+                  <Account />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/transactions"
+              element={
+                <ProtectedRoute>
+                  <Transactions />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/news"
+              element={<News />}
+            />
+            <Route
+              path="/view-order/:orderId?"
+              element={
+                <ProtectedRoute>
+                  <ViewOrder />
+                </ProtectedRoute>
+              }
+            />
+            {/* <Route path="/service" element={<Service />} /> */}
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/refund-policy" element={<RefundPolicy />} />
+            {/* ======================== USER PAGES =============================== */}
+            {/* ========== EMAIL VERIFY */}
+            <Route
+              path="/user-dashboard/:token?"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            {/* ======================== USER PAGES =============================== */}
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path="/" element={<Maintenance />} />
+            <Route path="*" element={<Maintenance />} />
           </Routes>
         )}
       </BrowserRouter>

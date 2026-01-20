@@ -44,8 +44,7 @@ const Header = () => {
           >
             <MenuIcon className="icon" />
           </div>
-          <SideMenu sideMenu={sideMenu} setSideMenu={setSideMenu} />
-          <Backdrop sideMenu={sideMenu} setSideMenu={setSideMenu} />
+
           <div className="logo header-center" onClick={() => navigate("/")}>
             <img src={IMAGES.logo} alt="" />
           </div>
@@ -53,9 +52,9 @@ const Header = () => {
             {user && (
               <div
                 onClick={() => navigate("/wallet")}
-                className="wallet-cont header-coin-btn"
+                className="wallet-cont mobile-header-coin-btn"
               >
-                <img width="20px" height="20px" src={IMAGES.coin} alt="" />
+                <img width="18px" height="18px" src={IMAGES.coin} alt="" />
                 <span>{parseFloat(balance).toFixed(2)}</span>
               </div>
             )}
