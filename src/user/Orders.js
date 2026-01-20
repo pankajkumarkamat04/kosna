@@ -24,8 +24,10 @@ const Orders = () => {
       if (res.success) {
         // API returns orders in res.orders, not res.data
         const ordersList = res.orders || res.data || [];
-        setOrders(ordersList.reverse());
-        setData(ordersList);
+        // Sort by date descending (newest first)
+        const sortedOrders = ordersList.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        setOrders(sortedOrders);
+        setData(sortedOrders);
         setLoading(false);
       } else {
         setLoading(false);

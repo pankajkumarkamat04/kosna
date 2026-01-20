@@ -120,8 +120,10 @@ const Wallet = () => {
       if (res.success) {
         // API returns transactions in res.transactions, not res.data
         const transactions = res.transactions || res.data || [];
-        setHistories(transactions.reverse());
-        setHistoryData(transactions);
+        // Sort by date descending (newest first)
+        const sortedTransactions = transactions.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        setHistories(sortedTransactions);
+        setHistoryData(sortedTransactions);
       } else {
         message.error(res.message || "Failed to load transaction history");
       }
