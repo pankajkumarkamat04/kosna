@@ -53,3 +53,11 @@ export const ProductInfoSkeleton = () => {
         </div>
     );
 };
+
+export const HomeBannerSkeleton = () => {
+    return (
+        <div className="banner">
+            <div className="image skeleton" style={{ width: '100%', height: '120px', borderRadius: '15px' }}></div>
+        </div>
+    );
+};

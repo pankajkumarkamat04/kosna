@@ -270,8 +270,8 @@
 }
 
 .package-container .amount img {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   display: block;
   margin-bottom: 5px;
   animation: float 3s infinite ease-in-out;
@@ -293,7 +293,7 @@
 
 .package-container .amount span {
   font-weight: 700;
-  font-size: 16px;
+  font-size: 18px;
   display: block;
   color: #fff !important;
   margin-bottom: 5px;
@@ -308,7 +308,7 @@
 }
 
 .package-container .amount .packdata {
-  font-size: 12px;
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.7) !important;
   margin-bottom: 5px;
   width: 100%;
@@ -566,17 +566,17 @@
   }
 
   .package-container .amount img {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     margin-bottom: 10px;
   }
 
   .package-container .amount span {
-    font-size: 16px;
+    font-size: 17px;
   }
 
   .package-container .amount .price {
-    font-size: 18px;
+    font-size: 19px;
   }
 }
 
@@ -612,8 +612,8 @@
   }
 
   .package-container .amount img {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
   }
 
   .package-container .amount span {

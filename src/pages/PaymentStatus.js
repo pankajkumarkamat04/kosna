@@ -21,32 +21,48 @@ const PaymentStatus = () => {
   useEffect(() => {
     const fetchPaymentStatus = async () => {
       try {
-        const clientTxnId = searchParams.get("client_txn_id") || searchParams.get("clientTxnId");
-        const txnId = searchParams.get("txn_id") || searchParams.get("txnId");
+        const clientTxnId = searchParams.get("client_txn_id") ||
+          searchParams.get("clientTxnId") ||
+          searchParams.get("clientTrxId") ||
+          searchParams.get("udf1");
+        const txnId = searchParams.get("txn_id") ||
+          searchParams.get("txnId") ||
+          searchParams.get("transactionId");
+
+        console.log("Debug - Full URL:", window.location.href);
+        console.log("Debug - Raw Search Params:", window.location.search);
+        console.log("Debug - PaymentStatus Init:", { clientTxnId, txnId });
 
         if (!clientTxnId) {
+          console.warn("Debug - Missing clientTxnId");
           message.error("Transaction ID not found");
           setLoading(false);
           return;
         }
 
+        console.log("Debug - Fetching transaction status...");
         const response = await transactionAPI.getTransactionStatus(clientTxnId, txnId);
         const data = await response.json();
 
+        console.log("Debug - API Response:", data);
+
         if (response.ok && (data.success !== false)) {
           const paymentInfo = data.data || data.transaction || data;
+          console.log("Debug - Payment Info:", paymentInfo);
           setPaymentData(paymentInfo);
-          
+
           // Get the actual payment status from the transaction data
           const status = paymentInfo?.status || data.status;
           const paymentStatus = paymentInfo?.paymentStatus || paymentInfo?.payment_status;
-          
+
+          console.log("Debug - Raw Status:", { status, paymentStatus });
+
           // Normalize status to lowercase for comparison
           const normalizedStatus = status?.toLowerCase() || '';
           const normalizedPaymentStatus = paymentStatus?.toLowerCase() || '';
-          
+
           // Check for pending statuses first
-          const isPaymentPending = 
+          const isPaymentPending =
             normalizedStatus === "pending" ||
             normalizedStatus === "processing" ||
             normalizedStatus === "initiated" ||
@@ -54,9 +70,9 @@ const PaymentStatus = () => {
             normalizedPaymentStatus === "pending" ||
             normalizedPaymentStatus === "processing" ||
             normalizedPaymentStatus === "initiated";
-          
+
           // Check for failure statuses
-          const isPaymentFailed = 
+          const isPaymentFailed =
             normalizedStatus === "failed" ||
             normalizedStatus === "failure" ||
             normalizedStatus === "fail" ||
@@ -67,11 +83,11 @@ const PaymentStatus = () => {
             normalizedPaymentStatus === "failed" ||
             normalizedPaymentStatus === "failure" ||
             normalizedPaymentStatus === "fail";
-          
+
           // Check for success statuses only if not pending and not failed
           const isPaymentSuccess = !isPaymentPending && !isPaymentFailed && (
-            normalizedStatus === "success" || 
-            normalizedStatus === "completed" || 
+            normalizedStatus === "success" ||
+            normalizedStatus === "completed" ||
             normalizedStatus === "paid" ||
             normalizedStatus === "successful" ||
             normalizedPaymentStatus === "success" ||
@@ -79,26 +95,34 @@ const PaymentStatus = () => {
             normalizedPaymentStatus === "paid"
           );
 
+          console.log("Debug - Determined Status:", {
+            isPaymentSuccess,
+            isPaymentPending,
+            isPaymentFailed
+          });
+
           setIsSuccess(isPaymentSuccess);
           setIsPending(isPaymentPending);
-          
+
           // Refresh balance if payment is successful (for both UPI and wallet payments)
           if (isPaymentSuccess) {
+            console.log("Debug - Refreshing balance...");
             // Refresh balance and wait a bit to ensure it's updated
             refreshBalance().then(() => {
-              // Balance refreshed successfully
-            }).catch(() => {
-              // Silently handle balance refresh errors
+              console.log("Debug - Balance refreshed");
+            }).catch((err) => {
+              console.error("Debug - Balance refresh failed:", err);
             });
           }
         } else {
+          console.error("Debug - Response not ok or data.success false:", data);
           setIsSuccess(false);
           setIsPending(false);
           setPaymentData(null);
           message.error(data.message || "Failed to fetch payment status");
         }
       } catch (error) {
-        console.error("Error fetching payment status:", error);
+        console.error("Debug - Error fetching payment status:", error);
         setIsSuccess(false);
         setIsPending(false);
         message.error("Failed to fetch payment status");
@@ -143,99 +167,66 @@ const PaymentStatus = () => {
 
   return (
     <Layout>
-      <div className="payment-status-container">
-        <div className="payment-status-card">
-          {/* Status Icon */}
-          <div className={`status-icon ${
-            isSuccess ? "success" : isPending ? "pending" : "failed"
-          }`}>
-            {isSuccess ? (
-              <CheckCircleIcon className="status-icon-svg" />
-            ) : isPending ? (
-              <AccessTimeIcon className="status-icon-svg" />
-            ) : (
-              <CancelIcon className="status-icon-svg" />
-            )}
+      <div className="payment-status-wrapper">
+        <div className={`payment-status-content ${isSuccess ? 'success-state' : isPending ? 'pending-state' : 'failed-state'}`}>
+          <div className="status-animation-icon">
+            <div className="status-circle-outer">
+              <div className="status-circle-inner">
+                {isSuccess ? <CheckCircleIcon /> : isPending ? <AccessTimeIcon /> : <CancelIcon />}
+              </div>
+            </div>
           </div>
 
-          {/* Status Title */}
-          <h2 className="status-title">
-            {isSuccess 
-              ? "Payment Successful" 
-              : isPending 
-              ? "Payment Pending" 
-              : "Payment Failed"}
-          </h2>
+          <h2>{isSuccess ? "Payment Successful" : isPending ? "Payment Pending" : "Payment Failed"}</h2>
 
-          {/* Payment Details Card */}
           {paymentData && (
-            <div className="payment-details-card">
-              <div className="payment-detail-row">
-                <span className="detail-label">Order ID</span>
-                <span className="detail-value">
-                  {paymentData.orderId || paymentData.order_id || paymentData.clientTxnId || paymentData.client_txn_id || "N/A"}
+            <div className="transaction-details-box">
+              <div className="detail-item">
+                <span>Order ID</span>
+                <span>{paymentData.orderId || paymentData.order_id || paymentData.clientTxnId || paymentData.client_txn_id || "N/A"}</span>
+              </div>
+
+              <div className="detail-item">
+                <span>Amount</span>
+                <span style={{ color: 'var(--a)', fontWeight: 'bold' }}>
+                  ₹{parseFloat(paymentData.amount || 0).toFixed(2)}
                 </span>
               </div>
-              <div className="payment-detail-row">
-                <span className="detail-label">Payment Time</span>
-                <span className="detail-value">
-                  {formatDate(paymentData.createdAt || paymentData.created_at || paymentData.paymentTime || paymentData.payment_time)}
-                </span>
-              </div>
+
               {paymentData.gameName && (
-                <div className="payment-detail-row">
-                  <span className="detail-label">Game Name</span>
-                  <span className="detail-value">{paymentData.gameName}</span>
+                <div className="detail-item">
+                  <span>Game Name</span>
+                  <span>{paymentData.gameName}</span>
                 </div>
               )}
-              {paymentData.userId && (
-                <div className="payment-detail-row">
-                  <span className="detail-label">User ID</span>
-                  <span className="detail-value">{paymentData.userId}</span>
-                </div>
-              )}
-              {paymentData.zoneId && (
-                <div className="payment-detail-row">
-                  <span className="detail-label">Zone ID</span>
-                  <span className="detail-value">{paymentData.zoneId}</span>
-                </div>
-              )}
+
               {paymentData.pack && (
-                <div className="payment-detail-row">
-                  <span className="detail-label">Pack</span>
-                  <span className="detail-value">{paymentData.pack}</span>
+                <div className="detail-item">
+                  <span>Pack</span>
+                  <span>{paymentData.pack}</span>
                 </div>
               )}
-              {paymentData.amount && (
-                <div className="payment-detail-row">
-                  <span className="detail-label">Amount</span>
-                  <span className="detail-value">₹{parseFloat(paymentData.amount).toFixed(2)}</span>
-                </div>
-              )}
-              {paymentData.status && (
-                <div className="payment-detail-row">
-                  <span className="detail-label">Status</span>
-                  <span className={`detail-value status-badge ${paymentData.status.toLowerCase()}`}>
-                    {paymentData.status}
-                  </span>
-                </div>
-              )}
+
+              <div className="detail-item">
+                <span>Date</span>
+                <span>{formatDate(paymentData.createdAt || paymentData.created_at || paymentData.paymentTime || paymentData.payment_time)}</span>
+              </div>
+
+              <div className="detail-item">
+                <span>Status</span>
+                <span className={`status-text ${isSuccess ? 'success' : isPending ? 'pending' : 'failed'}`}>
+                  {paymentData.status || (isSuccess ? 'Success' : isPending ? 'Pending' : 'Failed')}
+                </span>
+              </div>
             </div>
           )}
 
-          {/* Action Buttons */}
-          <div className="payment-action-buttons">
-            <button
-              className="btn-top-up"
-              onClick={() => navigate("/wallet")}
-            >
-              Top Up Again
+          <div className="action-buttons-group">
+            <button className="btn-primary-action" onClick={() => navigate("/wallet")}>
+              Add More Funds
             </button>
-            <button
-              className="btn-back-home"
-              onClick={() => navigate("/")}
-            >
-              Back To Home
+            <button className="btn-secondary-action" onClick={() => navigate("/")}>
+              Back to Home
             </button>
           </div>
         </div>

@@ -635,7 +635,7 @@ const ProductInfo = () => {
                     >
                       <img src={displayImage} alt="" />
                       <span>
-                        <small>{item.amount}</small>
+                        <p style={{ marginBottom: 0 }}>{item.amount}</p>
                       </span>
                       <div className="price">
                         ₹
